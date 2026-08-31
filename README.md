@@ -163,41 +163,6 @@ Evaluates readability, structure, organization, and long-term maintainability.
 
 
 
-🚀 Getting Started
-
-1. Clone the repository
-
-git clone https://github.com/khyatis1212/ai-code-review-system.git
-
-2. Navigate to the project
-
-cd ai-code-review-system
-
-3. Install dependencies
-
-pip install -r requirements.txt
-
-4. Configure the Groq API Key
-
-Create the following file:
-
-.streamlit/
-    └── secrets.toml
-
-Add:
-
-GROQ_API_KEY = "your_groq_api_key"
-
-«⚠️ Important: Never commit your API key or "secrets.toml" to GitHub.»
-
-5. Run the application
-
-streamlit run backend/app.py
-
-The application will open in your browser.
-
----
-
 📁 Project Structure
 
 ai-code-review-system/
