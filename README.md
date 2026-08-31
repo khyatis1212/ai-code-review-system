@@ -1,8 +1,15 @@
+
 🤖 AI Code Review System
 
 An AI-powered code review system that analyzes source code, identifies potential issues, evaluates code quality, and generates an improved version of the code.
 
 The system provides structured feedback across correctness, security, performance, and maintainability, along with an overall code quality score.
+
+🚀 Live Demo
+
+👉 "https://ai-code-review-system-emjgqd7d3rsf5vb9bphgcm.streamlit.app"
+
+Experience the application directly through the deployed Streamlit web app.
 
 
 
@@ -75,42 +82,41 @@ The system automatically detects whether the submitted code is Python or Java.
 
 🧠 How It Works
 
-        User Input
-            │
-            ▼
-   Paste / Upload Code
-            │
-            ▼
-    Language Detection
-       Python / Java
-            │
-            ▼
-       AI Code Review
-            │
-            ▼
-   ┌─────────────────────┐
-   │  Summary               │
-   │  Bugs                  │
-   │  Warnings              │
-   │  Security              │
-   │  Performance           │
-   │  Suggestions           │
-   └─────────────────────┘
-            │
-            ▼
-     Category Scores
-            │
-            ▼
-    Overall Code Score
-            │
-            ▼
-   AI Improved Code
-            │
-       ┌────┴────┐
-       ▼         ▼
-    Copy      Download
+                 User Input
+                     │
+                     ▼
+             Paste / Upload Code
+                     │
+                     ▼
+              Language Detection
+                Python / Java
+                     │
+                     ▼
+               AI Code Review
+                     │
+                     ▼
+        ┌─────────────────────────┐
+        │         Summary             │
+        │          Bugs               │
+        │        Warnings             │
+        │        Security             │
+        │      Performance            │
+        │       Suggestions           │
+        └─────────────────────────┘
+                     │
+                     ▼
+             Category Scores
+                     │
+                     ▼
+            Overall Code Score
+                     │
+                     ▼
+           AI Improved Code
+                ┌────┴────┐
+                ▼         ▼
+              Copy     Download
 
----
+
 
 🛠️ Tech Stack
 
@@ -122,21 +128,20 @@ GPT-OSS-120B| Code analysis and improvement
 HTML/CSS| Custom UI styling
 Regex| Review parsing and score extraction
 
----
+
 
 🎨 User Interface
 
 The application uses a custom-designed interface with:
 
-- Clean lavender-themed UI
+- Clean and modern lavender-themed design
 - Animated background elements
-- Responsive layout
-- Interactive review cards
-- Progress bars for category scores
-- Separate sections for different review dimensions
-- Improved-code display and download functionality
+- Interactive code review cards
+- Visual progress indicators for code quality scores
+- Clearly separated review categories
+- Improved-code display with copy and download options
 
----
+
 
 📋 Review Categories
 
@@ -156,7 +161,7 @@ Maintainability
 
 Evaluates readability, structure, organization, and long-term maintainability.
 
----
+
 
 🚀 Getting Started
 
@@ -177,13 +182,13 @@ pip install -r requirements.txt
 Create the following file:
 
 .streamlit/
-└── secrets.toml
+    └── secrets.toml
 
 Add:
 
 GROQ_API_KEY = "your_groq_api_key"
 
-«Important: Never commit your API key or "secrets.toml" to GitHub.»
+«⚠️ Important: Never commit your API key or "secrets.toml" to GitHub.»
 
 5. Run the application
 
@@ -201,12 +206,10 @@ ai-code-review-system/
 │   └── app.py
 │
 ├── requirements.txt
-│
 ├── README.md
-│
 └── .gitignore
 
----
+
 
 💻 Supported Languages
 
@@ -217,7 +220,7 @@ Currently supported:
 
 More programming languages can be added in future versions.
 
----
+
 
 🔮 Future Improvements
 
@@ -235,7 +238,7 @@ Possible future enhancements include:
 - Static analysis integration
 - CI/CD integration
 
----
+
 
 🎯 Project Goal
 
@@ -243,15 +246,15 @@ The goal of this project is to make code review accessible, structured, and acti
 
 Instead of simply pointing out problems, the system attempts to explain what could be wrong, why it matters, how the code can be improved, and what an improved implementation could look like.
 
----
+
 
 👩‍💻 Author
 
-Khyati Singh
+Khyati 
 
 GitHub: "@khyatis1212" (https://github.com/khyatis1212)
 
----
+
 
 ⭐ Support
 
