@@ -587,10 +587,11 @@ label {
 
 
 /* =========================================================
-   REVIEW BUTTON
+   ALL BUTTONS — DARK MODE TEXT FIX
    ========================================================= */
 
-.stButton > button {
+.stButton > button,
+.stDownloadButton > button {
 
     background-color: #817093 !important;
 
@@ -619,10 +620,14 @@ label {
 }
 
 
-.stButton > button p,
-.stButton > button span {
+/* Force ALL button text to remain WHITE in dark mode */
+
+.stButton > button *,
+.stDownloadButton > button * {
 
     color: #FFFFFF !important;
+
+    fill: #FFFFFF !important;
 
     font-family: "Times New Roman", Times, serif !important;
 
@@ -631,11 +636,28 @@ label {
 }
 
 
-.stButton > button:hover {
+/* Button hover */
+
+.stButton > button:hover,
+.stDownloadButton > button:hover {
 
     background-color: #705F80 !important;
 
+    color: #FFFFFF !important;
+
     transform: translateY(-3px);
+
+}
+
+
+/* Keep button text WHITE on hover */
+
+.stButton > button:hover *,
+.stDownloadButton > button:hover * {
+
+    color: #FFFFFF !important;
+
+    fill: #FFFFFF !important;
 
 }
 
@@ -1717,6 +1739,7 @@ ORIGINAL SOURCE CODE:
 
 
                     improvement_response = client.chat.completions.create(
+                    model="llama-3.3-70b-versatile",
                     model="openai/gpt-oss-120b",
                     messages=[
                         {
@@ -1894,4 +1917,3 @@ ORIGINAL SOURCE CODE:
 
         st.warning(
             "Please enter or upload some code first."
-        )
