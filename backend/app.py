@@ -158,8 +158,27 @@ st.markdown("""
     padding-bottom: 5rem;
     position: relative;
     z-index: 10;
+    isolation: isolate;
 
     animation: pageReveal 2.2s ease-out both;
+}
+
+/* Keep decorative bubbles/rings strictly behind the UI content */
+.stApp > div:first-child::before,
+.stApp > div:first-child::after,
+.main .block-container::before,
+.main .block-container::after {
+    z-index: 0 !important;
+    pointer-events: none !important;
+}
+
+/* Keep Streamlit's actual content above decorations */
+.main,
+.main .block-container,
+.main .block-container > div,
+[data-testid="stAppViewContainer"] main {
+    position: relative;
+    z-index: 10;
 }
 
 
@@ -587,28 +606,27 @@ label {
 
 
 /* =========================================================
-   ALL BUTTONS — DARK MODE TEXT FIX
+   BUTTONS — DARK MODE ONLY
+   Review / Submit / Copy / Download buttons use the
+   same lavender colour and WHITE text in dark mode.
    ========================================================= */
 
-.stButton > button,
-.stDownloadButton > button {
+/* Streamlit dark theme */
+[data-theme="dark"] .stButton > button,
+[data-theme="dark"] .stDownloadButton > button,
+[data-theme="dark"] [data-testid="stFileUploader"] button {
 
     background-color: #817093 !important;
-
     color: #FFFFFF !important;
 
     border: none !important;
-
     border-radius: 13px !important;
 
     padding: 0.75rem 1.9rem !important;
 
     font-family: "Times New Roman", Times, serif !important;
-
     font-size: 17px !important;
-
     font-weight: bold !important;
-
     font-style: italic !important;
 
     box-shadow: none !important;
@@ -616,49 +634,41 @@ label {
     transition:
         transform 0.3s ease,
         background-color 0.3s ease;
-
 }
 
 
-/* Force ALL button text to remain WHITE in dark mode */
-
-.stButton > button *,
-.stDownloadButton > button * {
+/* Make EVERY button's text/icon WHITE in dark mode */
+[data-theme="dark"] .stButton > button *,
+[data-theme="dark"] .stDownloadButton > button *,
+[data-theme="dark"] [data-testid="stFileUploader"] button * {
 
     color: #FFFFFF !important;
-
     fill: #FFFFFF !important;
 
     font-family: "Times New Roman", Times, serif !important;
-
     font-weight: bold !important;
-
 }
 
 
-/* Button hover */
-
-.stButton > button:hover,
-.stDownloadButton > button:hover {
+/* Same hover colour for ALL buttons in dark mode */
+[data-theme="dark"] .stButton > button:hover,
+[data-theme="dark"] .stDownloadButton > button:hover,
+[data-theme="dark"] [data-testid="stFileUploader"] button:hover {
 
     background-color: #705F80 !important;
-
     color: #FFFFFF !important;
 
     transform: translateY(-3px);
-
 }
 
 
-/* Keep button text WHITE on hover */
-
-.stButton > button:hover *,
-.stDownloadButton > button:hover * {
+/* Keep text WHITE on hover */
+[data-theme="dark"] .stButton > button:hover *,
+[data-theme="dark"] .stDownloadButton > button:hover *,
+[data-theme="dark"] [data-testid="stFileUploader"] button:hover * {
 
     color: #FFFFFF !important;
-
     fill: #FFFFFF !important;
-
 }
 
 
