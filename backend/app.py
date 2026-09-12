@@ -152,13 +152,7 @@ st.markdown("""
     z-index: 10;
 }
 
-
-.main .block-container > div {
-    position: relative;
-    z-index: 2;
-}
 .main .block-container {
-    isolation: isolate;
     max-width: 1100px;
     padding-top: 4rem;
     padding-bottom: 5rem;
@@ -232,7 +226,6 @@ st.markdown("""
    ========================================================= */
 
 .main .block-container::before {
-    z-index: 0 !important;
     content: "";
 
     position: fixed;
@@ -266,7 +259,6 @@ st.markdown("""
    ========================================================= */
 
 .main .block-container::after {
-    z-index: 0 !important;
     content: "";
 
     position: fixed;
@@ -595,80 +587,142 @@ label {
 
 
 /* =========================================================
-   ALL BUTTONS — DARK MODE TEXT FIX
+   BUTTONS — LIGHT MODE UNCHANGED
    ========================================================= */
 
 .stButton > button,
 .stDownloadButton > button {
-
-    background-color: #131720 !important;
-
+    background-color: #817093 !important;
     color: #FFFFFF !important;
-
     border: none !important;
-
     border-radius: 13px !important;
-
     padding: 0.75rem 1.9rem !important;
-
     font-family: "Times New Roman", Times, serif !important;
-
     font-size: 17px !important;
-
     font-weight: bold !important;
-
     font-style: italic !important;
-
     box-shadow: none !important;
-
-    transition:
-        transform 0.3s ease,
-        background-color 0.3s ease;
-
+    transition: transform 0.3s ease, background-color 0.3s ease;
 }
-
-
-/* Force ALL button text to remain WHITE in dark mode */
 
 .stButton > button *,
 .stDownloadButton > button * {
-
     color: #FFFFFF !important;
-
     fill: #FFFFFF !important;
-
     font-family: "Times New Roman", Times, serif !important;
-
     font-weight: bold !important;
-
 }
-
-
-/* Button hover */
 
 .stButton > button:hover,
 .stDownloadButton > button:hover {
-
-    background-color: #131720 !important;
-
+    background-color: #705F80 !important;
     color: #FFFFFF !important;
-
     transform: translateY(-3px);
-
 }
-
-
-/* Keep button text WHITE on hover */
 
 .stButton > button:hover *,
 .stDownloadButton > button:hover * {
-
     color: #FFFFFF !important;
-
     fill: #FFFFFF !important;
-
 }
 
+/* =========================================================
+   DARK MODE — REQUESTED UI
+   ========================================================= */
+
+[data-theme="dark"] .stApp,
+[data-theme="dark"] [data-testid="stAppViewContainer"] {
+    background-color: #0F131D !important;
+    color: #FFFFFF !important;
+}
+
+[data-theme="dark"] .main .block-container {
+    background-color: transparent !important;
+}
+
+[data-theme="dark"] h1 {
+    color: #CBB5F5 !important;
+}
+
+[data-theme="dark"] h2,
+[data-theme="dark"] h3,
+[data-theme="dark"] p,
+[data-theme="dark"] label,
+[data-theme="dark"] [data-testid="stMarkdownContainer"] {
+    color: #FFFFFF !important;
+}
+
+[data-theme="dark"] .stTextArea,
+[data-theme="dark"] [data-testid="stFileUploader"],
+[data-theme="dark"] .review-output,
+[data-theme="dark"] .review-card,
+[data-theme="dark"] .score-card,
+[data-theme="dark"] .phase3-score-card {
+    background-color: #1B2230 !important;
+    border-color: #4B5363 !important;
+}
+
+[data-theme="dark"] .stTextArea textarea,
+[data-theme="dark"] [data-testid="stFileUploaderDropzone"] {
+    background-color: #171D28 !important;
+    color: #FFFFFF !important;
+    border-color: #596171 !important;
+}
+
+/* EVERY BUTTON IN DARK MODE: same Upload colour + white text */
+[data-theme="dark"] .stButton > button,
+[data-theme="dark"] .stDownloadButton > button,
+[data-theme="dark"] [data-testid="stFileUploader"] button,
+[data-theme="dark"] button[kind="secondary"],
+[data-theme="dark"] button[kind="primary"] {
+    background-color: #131720 !important;
+    color: #FFFFFF !important;
+    border-color: #2B3342 !important;
+}
+
+[data-theme="dark"] .stButton > button *,
+[data-theme="dark"] .stDownloadButton > button *,
+[data-theme="dark"] [data-testid="stFileUploader"] button *,
+[data-theme="dark"] button[kind="secondary"] *,
+[data-theme="dark"] button[kind="primary"] * {
+    color: #FFFFFF !important;
+    fill: #FFFFFF !important;
+    stroke: #FFFFFF !important;
+}
+
+[data-theme="dark"] .stButton > button:hover,
+[data-theme="dark"] .stDownloadButton > button:hover,
+[data-theme="dark"] [data-testid="stFileUploader"] button:hover,
+[data-theme="dark"] button[kind="secondary"]:hover,
+[data-theme="dark"] button[kind="primary"]:hover {
+    background-color: #131720 !important;
+    color: #FFFFFF !important;
+}
+
+[data-theme="dark"] .stButton > button:hover *,
+[data-theme="dark"] .stDownloadButton > button:hover *,
+[data-theme="dark"] [data-testid="stFileUploader"] button:hover *,
+[data-theme="dark"] button[kind="secondary"]:hover *,
+[data-theme="dark"] button[kind="primary"]:hover * {
+    color: #FFFFFF !important;
+    fill: #FFFFFF !important;
+    stroke: #FFFFFF !important;
+}
+
+/* Decorative background stays behind the content */
+.main .block-container {
+    isolation: isolate;
+}
+
+.main .block-container::before,
+.main .block-container::after {
+    z-index: 0 !important;
+}
+
+.main .block-container > div {
+    position: relative;
+    z-index: 2;
+}
 
 /* =========================================================
    AI REVIEW OUTPUT
@@ -811,7 +865,6 @@ header {
     }
 
     .main .block-container {
-    isolation: isolate;
         padding-left: 1.2rem;
         padding-right: 1.2rem;
     }
