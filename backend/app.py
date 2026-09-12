@@ -1165,61 +1165,6 @@ header {
     color: #756481;
 }
 
-
-/* =========================================================
-   DARK MODE — REFERENCE UI (DARK ONLY)
-   ========================================================= */
-[data-theme="dark"] .stApp,
-[data-theme="dark"] [data-testid="stAppViewContainer"] { background-color:#10151F !important; color:#FFFFFF !important; }
-[data-theme="dark"] .stApp > div:first-child::before { background-color:#302B45 !important; opacity:.72 !important; z-index:0 !important; }
-[data-theme="dark"] .stApp > div:first-child::after { background-color:#2C2741 !important; opacity:.72 !important; z-index:0 !important; }
-[data-theme="dark"] .main .block-container::before,
-[data-theme="dark"] .main .block-container::after { display:none !important; }
-[data-theme="dark"] .main,
-[data-theme="dark"] .main .block-container { position:relative !important; z-index:10 !important; background-color:transparent !important; }
-[data-theme="dark"] .main .block-container > div { position:relative !important; z-index:11 !important; }
-[data-theme="dark"] h1 { color:#CDB8F3 !important; }
-[data-theme="dark"] h2,
-[data-theme="dark"] h3,
-[data-theme="dark"] p,
-[data-theme="dark"] label,
-[data-theme="dark"] [data-testid="stMarkdownContainer"] { color:#FFFFFF !important; }
-[data-theme="dark"] .stTextArea,
-[data-theme="dark"] [data-testid="stFileUploader"],
-[data-theme="dark"] .review-output,
-[data-theme="dark"] .review-card,
-[data-theme="dark"] .score-card,
-[data-theme="dark"] .phase3-score-card { background-color:#202733 !important; border:1px solid #50596B !important; border-color:#50596B !important; box-shadow:none !important; }
-[data-theme="dark"] .stTextArea textarea,
-[data-theme="dark"] [data-testid="stFileUploaderDropzone"] { background-color:#1C232E !important; color:#FFFFFF !important; border-color:#535D70 !important; }
-/* EVERY BUTTON — Upload colour + white text */
-[data-theme="dark"] .stButton > button,
-[data-theme="dark"] .stDownloadButton > button,
-[data-theme="dark"] [data-testid="stFileUploader"] button,
-[data-theme="dark"] button[kind="primary"],
-[data-theme="dark"] button[kind="secondary"] { background-color:#131720 !important; color:#FFFFFF !important; border:1px solid #252D3A !important; border-radius:13px !important; box-shadow:none !important; }
-[data-theme="dark"] .stButton > button *,
-[data-theme="dark"] .stDownloadButton > button *,
-[data-theme="dark"] [data-testid="stFileUploader"] button *,
-[data-theme="dark"] button[kind="primary"] *,
-[data-theme="dark"] button[kind="secondary"] * { color:#FFFFFF !important; fill:#FFFFFF !important; stroke:#FFFFFF !important; }
-[data-theme="dark"] .stButton > button:hover,
-[data-theme="dark"] .stDownloadButton > button:hover,
-[data-theme="dark"] [data-testid="stFileUploader"] button:hover,
-[data-theme="dark"] button[kind="primary"]:hover,
-[data-theme="dark"] button[kind="secondary"]:hover { background-color:#131720 !important; color:#FFFFFF !important; border-color:#3A4353 !important; }
-[data-theme="dark"] .stButton > button:hover *,
-[data-theme="dark"] .stDownloadButton > button:hover *,
-[data-theme="dark"] [data-testid="stFileUploader"] button:hover *,
-[data-theme="dark"] button[kind="primary"]:hover *,
-[data-theme="dark"] button[kind="secondary"]:hover * { color:#FFFFFF !important; fill:#FFFFFF !important; stroke:#FFFFFF !important; }
-[data-theme="dark"] hr { border-color:#343C4B !important; }
-[data-theme="dark"] .review-card-title,
-[data-theme="dark"] .review-card-content,
-[data-theme="dark"] .score-title,
-[data-theme="dark"] .score-label,
-[data-theme="dark"] .score-category-label { color:#FFFFFF !important; }
-[data-theme="dark"] .score-number { color:#CDB8F3 !important; }
 </style>
 """, unsafe_allow_html=True)
 
