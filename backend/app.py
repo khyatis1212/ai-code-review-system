@@ -1917,3 +1917,4 @@ ORIGINAL SOURCE CODE:
 
         st.warning(
             "Please enter or upload some code first."
+        )
