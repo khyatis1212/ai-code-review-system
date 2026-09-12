@@ -139,58 +139,37 @@ st.markdown("""
    ========================================================= */
 
 .stApp {
-
-    background-color: #F8F6FC !important;
-
-    font-family:
-        "Times New Roman",
-        Times,
-        serif !important;
-
+    background-color: #F6F1FA !important;
+    font-family: "Times New Roman", Times, serif !important;
     color: #302936 !important;
-
     overflow-x: hidden;
-
 }
 
 
-/* =========================================================
-   MAIN CONTAINER
-   ========================================================= */
-
+/* Keep content above decorative background */
 .main {
-
     position: relative;
-
     z-index: 10;
-
 }
-
 
 .main .block-container {
-
-    max-width: 1100px !important;
-
-    padding-top: 7rem !important;
-
-    padding-bottom: 5rem !important;
-
+    max-width: 1100px;
+    padding-top: 4rem;
+    padding-bottom: 5rem;
     position: relative;
-
     z-index: 10;
 
-    animation:
-        pageReveal 1.5s ease-out both;
-
+    animation: pageReveal 2.2s ease-out both;
 }
 
 
 /* =========================================================
-   DECORATIVE BACKGROUND — LEFT CIRCLE
+   CLASSY BACKGROUND DECORATION
    ========================================================= */
 
-.stApp > div:first-child::before {
+/* Large soft lavender shape — left */
 
+.stApp > div:first-child::before {
     content: "";
 
     position: fixed;
@@ -198,31 +177,26 @@ st.markdown("""
     width: 360px;
     height: 360px;
 
-    left: -220px;
-    top: 55px;
+    left: -180px;
+    top: 80px;
 
     border-radius: 50%;
 
-    background-color: #E6DDF0;
+    background-color: #E9DFF0;
 
-    opacity: 0.72;
+    opacity: 0.65;
 
     z-index: 0;
 
     pointer-events: none;
 
-    animation:
-        floatLeft 12s ease-in-out infinite;
-
+    animation: floatLeft 12s ease-in-out infinite;
 }
 
 
-/* =========================================================
-   DECORATIVE BACKGROUND — RIGHT CIRCLE
-   ========================================================= */
+/* Large soft lavender shape — right */
 
 .stApp > div:first-child::after {
-
     content: "";
 
     position: fixed;
@@ -230,80 +204,41 @@ st.markdown("""
     width: 300px;
     height: 300px;
 
-    right: -150px;
-    bottom: -30px;
+    right: -140px;
+    bottom: 40px;
 
     border-radius: 50%;
 
-    background-color: #E5DBEE;
+    background-color: #E5D9ED;
 
-    opacity: 0.72;
+    opacity: 0.65;
 
     z-index: 0;
 
     pointer-events: none;
 
-    animation:
-        floatRight 14s ease-in-out infinite;
-
+    animation: floatRight 14s ease-in-out infinite;
 }
 
 
 /* =========================================================
-   ABSTRACT RIGHT RING
+   ABSTRACT RINGS
    ========================================================= */
 
 .main .block-container::before {
-
     content: "";
 
     position: fixed;
 
-    width: 125px;
-    height: 125px;
+    width: 135px;
+    height: 135px;
 
-    right: 6%;
-    top: 170px;
-
-    border-radius: 50%;
-
-    border: 2px solid #D5C7DF;
-
-    opacity: 0.45;
-
-    z-index: 1;
-
-    pointer-events: none;
-
-    box-shadow:
-        0 0 0 18px #ECE6F2,
-        0 0 0 35px #F1ECF5;
-
-    animation:
-        ringFloat 11s ease-in-out infinite;
-
-}
-
-
-/* =========================================================
-   DECORATIVE DOTS
-   ========================================================= */
-
-.main .block-container::after {
-
-    content: "";
-
-    position: fixed;
-
-    width: 20px;
-    height: 20px;
-
-    left: 7%;
-    top: 42%;
+    right: 9%;
+    top: 115px;
 
     border-radius: 50%;
 
-    background-color: #D7C9E1;
+    border: 2px solid #D3C2DE;
 
     opacity: 0.55;
 
@@ -312,26 +247,57 @@ st.markdown("""
     pointer-events: none;
 
     box-shadow:
+        0 0 0 18px #EDE5F2,
+        0 0 0 36px #F0EAF5;
 
-        95px 75px 0 #DED4E7,
-        220px -55px 0 #E8E0EE,
-        370px 90px 0 #DCCFE5,
-        520px -20px 0 #E7DEED,
-        680px 100px 0 #DED3E8,
-
-        55px 300px 0 #E5DCEB,
-        240px 360px 0 #DFD4E8,
-        430px 280px 0 #EAE3EF,
-        610px 390px 0 #E1D7E9;
-
-    animation:
-        dotsFloat 13s ease-in-out infinite;
-
+    animation: ringFloat 11s ease-in-out infinite;
 }
 
 
 /* =========================================================
-   ANIMATIONS
+   LARGE DECORATIVE DOTS
+   ========================================================= */
+
+.main .block-container::after {
+    content: "";
+
+    position: fixed;
+
+    width: 24px;
+    height: 24px;
+
+    left: 10%;
+    top: 38%;
+
+    border-radius: 50%;
+
+    background-color: #D3C3DF;
+
+    opacity: 0.7;
+
+    z-index: 1;
+
+    pointer-events: none;
+
+    box-shadow:
+
+        95px 75px 0 #DED2E7,
+        220px -55px 0 #E6DDEA,
+        370px 90px 0 #D9CBE3,
+        520px -20px 0 #E4D9EA,
+        680px 100px 0 #DACDE5,
+
+        55px 300px 0 #E2D7E9,
+        240px 360px 0 #DCCFE6,
+        430px 280px 0 #E7DEED,
+        610px 390px 0 #DDD1E7;
+
+    animation: dotsFloat 13s ease-in-out infinite;
+}
+
+
+/* =========================================================
+   BACKGROUND ANIMATIONS
    ========================================================= */
 
 @keyframes floatLeft {
@@ -363,15 +329,11 @@ st.markdown("""
 @keyframes ringFloat {
 
     0%, 100% {
-        transform:
-            translateY(0)
-            rotate(0deg);
+        transform: translateY(0) rotate(0deg);
     }
 
     50% {
-        transform:
-            translateY(-12px)
-            rotate(5deg);
+        transform: translateY(-12px) rotate(5deg);
     }
 
 }
@@ -390,11 +352,25 @@ st.markdown("""
 }
 
 
+/* =========================================================
+   SLOW WEBSITE TEXT ANIMATION
+   ========================================================= */
+
 @keyframes pageReveal {
 
     0% {
         opacity: 0;
-        transform: translateY(25px);
+        transform: translateY(30px);
+    }
+
+    35% {
+        opacity: 0.2;
+        transform: translateY(22px);
+    }
+
+    70% {
+        opacity: 0.65;
+        transform: translateY(8px);
     }
 
     100% {
@@ -406,57 +382,42 @@ st.markdown("""
 
 
 /* =========================================================
-   TITLE — IMAGE STYLE
+   MAIN TITLE
    ========================================================= */
 
 h1 {
+    color: #302936 !important;
 
-    color: #725481 !important;
+    font-family: "Times New Roman", Times, serif !important;
 
-    font-family:
-        "Times New Roman",
-        Times,
-        serif !important;
-
-    font-size: 3.25rem !important;
+    font-size: 3.3rem !important;
 
     font-weight: bold !important;
 
-    font-style: normal !important;
+    font-style: italic !important;
 
-    text-align: center !important;
+    letter-spacing: -0.7px;
 
-    letter-spacing: -0.8px;
-
-    margin-bottom: 0.65rem !important;
-
-    animation:
-        titleReveal 1.4s ease-out both;
-
+    animation: titleReveal 2.5s ease-out both;
 }
 
 
-/* =========================================================
-   SUBTITLE
-   ========================================================= */
+@keyframes titleReveal {
 
-.hero-subtitle {
+    0% {
+        opacity: 0;
+        transform: translateY(25px);
+    }
 
-    text-align: center;
+    45% {
+        opacity: 0.3;
+        transform: translateY(15px);
+    }
 
-    font-family:
-        "Times New Roman",
-        Times,
-        serif;
-
-    font-size: 17px;
-
-    color: #6F6177;
-
-    margin-bottom: 3.1rem;
-
-    animation:
-        textReveal 1.6s ease-out both;
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 
 }
 
@@ -467,16 +428,13 @@ h1 {
 
 h2,
 h3 {
-
     color: #382F3E !important;
 
-    font-family:
-        "Times New Roman",
-        Times,
-        serif !important;
+    font-family: "Times New Roman", Times, serif !important;
 
     font-weight: bold !important;
 
+    animation: textReveal 1.6s ease-out both;
 }
 
 
@@ -485,49 +443,24 @@ h3 {
    ========================================================= */
 
 p {
-
     color: #433948 !important;
 
-    font-family:
-        "Times New Roman",
-        Times,
-        serif !important;
+    font-family: "Times New Roman", Times, serif !important;
 
+    animation: textReveal 1.8s ease-out both;
 }
 
 
 label {
-
     color: #382F3E !important;
 
-    font-family:
-        "Times New Roman",
-        Times,
-        serif !important;
+    font-family: "Times New Roman", Times, serif !important;
 
     font-weight: bold !important;
-
 }
 
 
-/* =========================================================
-   TEXT ANIMATION
-   ========================================================= */
-
-@keyframes titleReveal {
-
-    0% {
-        opacity: 0;
-        transform: translateY(22px);
-    }
-
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-
-}
-
+/* Text animation */
 
 @keyframes textReveal {
 
@@ -556,15 +489,10 @@ label {
 
     border-radius: 20px !important;
 
-    border: 1px solid #DED5E7 !important;
+    border: 1px solid #DDD2E6 !important;
 
     box-shadow:
-        0 6px 22px rgba(
-            75,
-            55,
-            90,
-            0.055
-        );
+        0 6px 20px rgba(75, 55, 90, 0.06);
 
     transition:
         transform 0.35s ease,
@@ -575,9 +503,9 @@ label {
 
 .stTextArea:hover {
 
-    transform: translateY(-2px);
+    transform: translateY(-3px);
 
-    border-color: #C7B8D3 !important;
+    border-color: #BCAAC9 !important;
 
 }
 
@@ -594,14 +522,13 @@ label {
 
     padding: 17px !important;
 
-    font-family:
-        "Times New Roman",
-        Times,
-        serif !important;
+    font-family: "Times New Roman", Times, serif !important;
 
     font-size: 16px !important;
 
     line-height: 1.6 !important;
+
+    box-shadow: none !important;
 
 }
 
@@ -616,26 +543,21 @@ label {
 
 
 /* =========================================================
-   FILE UPLOADER — IMAGE STYLE
+   FILE UPLOADER
    ========================================================= */
 
 [data-testid="stFileUploader"] {
 
     background-color: #FFFFFF !important;
 
-    border: 1px solid #DDD3E6 !important;
+    border: 1px solid #DDD2E6 !important;
 
     border-radius: 20px !important;
 
     padding: 20px !important;
 
     box-shadow:
-        0 6px 20px rgba(
-            75,
-            55,
-            90,
-            0.06
-        );
+        0 6px 20px rgba(75, 55, 90, 0.06);
 
     transition:
         transform 0.35s ease,
@@ -657,215 +579,78 @@ label {
 
     background-color: #FBF9FE !important;
 
-    border: 1px solid #D8CDDF !important;
+    border: 1px dashed #BDAFC9 !important;
 
     border-radius: 15px !important;
-
-    min-height: 88px !important;
-
-}
-
-
-[data-testid="stFileUploaderDropzoneInstructions"] {
-
-    color: #433948 !important;
-
-}
-
-
-[data-testid="stFileUploaderDropzoneInstructions"] span {
-
-    color: #433948 !important;
 
 }
 
 
 /* =========================================================
-   ALL BUTTONS — LIGHT MODE
+   BUTTONS — LIGHT MODE UNCHANGED
    ========================================================= */
 
 .stButton > button,
 .stDownloadButton > button {
-
-    background-color: #121722 !important;
-
+    background-color: #817093 !important;
     color: #FFFFFF !important;
-
     border: none !important;
-
     border-radius: 13px !important;
-
-    padding:
-        0.75rem 1.9rem !important;
-
-    font-family:
-        "Times New Roman",
-        Times,
-        serif !important;
-
+    padding: 0.75rem 1.9rem !important;
+    font-family: "Times New Roman", Times, serif !important;
     font-size: 17px !important;
-
     font-weight: bold !important;
-
     font-style: italic !important;
-
     box-shadow: none !important;
-
-    transition:
-        transform 0.3s ease,
-        background-color 0.3s ease;
-
+    transition: transform 0.3s ease, background-color 0.3s ease;
 }
-
 
 .stButton > button *,
 .stDownloadButton > button * {
-
     color: #FFFFFF !important;
-
     fill: #FFFFFF !important;
-
-    stroke: #FFFFFF !important;
-
-    font-family:
-        "Times New Roman",
-        Times,
-        serif !important;
-
+    font-family: "Times New Roman", Times, serif !important;
     font-weight: bold !important;
-
 }
-
 
 .stButton > button:hover,
 .stDownloadButton > button:hover {
-
-    background-color: #121722 !important;
-
+    background-color: #705F80 !important;
     color: #FFFFFF !important;
-
     transform: translateY(-3px);
-
 }
-
 
 .stButton > button:hover *,
 .stDownloadButton > button:hover * {
-
     color: #FFFFFF !important;
-
     fill: #FFFFFF !important;
-
-    stroke: #FFFFFF !important;
-
 }
-
 
 /* =========================================================
-   FILE UPLOADER BUTTON
-   ========================================================= */
-
-[data-testid="stFileUploader"] button {
-
-    background-color: #121722 !important;
-
-    color: #FFFFFF !important;
-
-    border: none !important;
-
-    border-radius: 12px !important;
-
-    font-family:
-        "Times New Roman",
-        Times,
-        serif !important;
-
-    font-weight: bold !important;
-
-}
-
-
-[data-testid="stFileUploader"] button * {
-
-    color: #FFFFFF !important;
-
-    fill: #FFFFFF !important;
-
-    stroke: #FFFFFF !important;
-
-}
-
-
-[data-testid="stFileUploader"] button:hover {
-
-    background-color: #121722 !important;
-
-    color: #FFFFFF !important;
-
-}
-
-
-/* =========================================================
-   REVIEW BUTTON — IMAGE SIZE
-   ========================================================= */
-
-.review-button-container {
-
-    margin-top: 1.55rem;
-
-}
-
-
-/* =========================================================
-   DARK MODE
+   DARK MODE — REQUESTED UI
    ========================================================= */
 
 [data-theme="dark"] .stApp,
 [data-theme="dark"] [data-testid="stAppViewContainer"] {
-
-    background-color: #0F141D !important;
-
+    background-color: #0F131D !important;
     color: #FFFFFF !important;
-
 }
-
 
 [data-theme="dark"] .main .block-container {
-
     background-color: transparent !important;
-
 }
-
 
 [data-theme="dark"] h1 {
-
     color: #CBB5F5 !important;
-
 }
-
-
-[data-theme="dark"] .hero-subtitle {
-
-    color: #FFFFFF !important;
-
-}
-
 
 [data-theme="dark"] h2,
 [data-theme="dark"] h3,
 [data-theme="dark"] p,
 [data-theme="dark"] label,
-[data-theme="dark"]
-[data-testid="stMarkdownContainer"] {
-
+[data-theme="dark"] [data-testid="stMarkdownContainer"] {
     color: #FFFFFF !important;
-
 }
-
-
-/* =========================================================
-   DARK MODE CARDS
-   ========================================================= */
 
 [data-theme="dark"] .stTextArea,
 [data-theme="dark"] [data-testid="stFileUploader"],
@@ -873,146 +658,71 @@ label {
 [data-theme="dark"] .review-card,
 [data-theme="dark"] .score-card,
 [data-theme="dark"] .phase3-score-card {
-
-    background-color: #1B222D !important;
-
-    border-color: #4B5362 !important;
-
+    background-color: #1B2230 !important;
+    border-color: #4B5363 !important;
 }
 
-
-[data-theme="dark"] .stTextArea textarea {
-
-    background-color: #171D27 !important;
-
+[data-theme="dark"] .stTextArea textarea,
+[data-theme="dark"] [data-testid="stFileUploaderDropzone"] {
+    background-color: #171D28 !important;
     color: #FFFFFF !important;
-
-    border-color: #596170 !important;
-
+    border-color: #596171 !important;
 }
 
-
-[data-theme="dark"]
-[data-testid="stFileUploaderDropzone"] {
-
-    background-color: #171D27 !important;
-
-    border-color: #596170 !important;
-
-}
-
-
-[data-theme="dark"]
-[data-testid="stFileUploaderDropzoneInstructions"],
-[data-theme="dark"]
-[data-testid="stFileUploaderDropzoneInstructions"] span {
-
-    color: #FFFFFF !important;
-
-}
-
-
-/* =========================================================
-   DARK MODE — EVERY BUTTON
-   ========================================================= */
-
+/* EVERY BUTTON IN DARK MODE: same Upload colour + white text */
 [data-theme="dark"] .stButton > button,
 [data-theme="dark"] .stDownloadButton > button,
-[data-theme="dark"]
-[data-testid="stFileUploader"] button,
-[data-theme="dark"]
-button[kind="secondary"],
-[data-theme="dark"]
-button[kind="primary"] {
-
+[data-theme="dark"] [data-testid="stFileUploader"] button,
+[data-theme="dark"] button[kind="secondary"],
+[data-theme="dark"] button[kind="primary"] {
     background-color: #131720 !important;
-
     color: #FFFFFF !important;
-
     border-color: #2B3342 !important;
-
 }
-
 
 [data-theme="dark"] .stButton > button *,
 [data-theme="dark"] .stDownloadButton > button *,
-[data-theme="dark"]
-[data-testid="stFileUploader"] button *,
-[data-theme="dark"]
-button[kind="secondary"] *,
-[data-theme="dark"]
-button[kind="primary"] * {
-
+[data-theme="dark"] [data-testid="stFileUploader"] button *,
+[data-theme="dark"] button[kind="secondary"] *,
+[data-theme="dark"] button[kind="primary"] * {
     color: #FFFFFF !important;
-
     fill: #FFFFFF !important;
-
     stroke: #FFFFFF !important;
-
 }
-
 
 [data-theme="dark"] .stButton > button:hover,
 [data-theme="dark"] .stDownloadButton > button:hover,
-[data-theme="dark"]
-[data-testid="stFileUploader"] button:hover,
-[data-theme="dark"]
-button[kind="secondary"]:hover,
-[data-theme="dark"]
-button[kind="primary"]:hover {
-
+[data-theme="dark"] [data-testid="stFileUploader"] button:hover,
+[data-theme="dark"] button[kind="secondary"]:hover,
+[data-theme="dark"] button[kind="primary"]:hover {
     background-color: #131720 !important;
-
     color: #FFFFFF !important;
-
 }
-
 
 [data-theme="dark"] .stButton > button:hover *,
 [data-theme="dark"] .stDownloadButton > button:hover *,
-[data-theme="dark"]
-[data-testid="stFileUploader"] button:hover *,
-[data-theme="dark"]
-button[kind="secondary"]:hover *,
-[data-theme="dark"]
-button[kind="primary"]:hover * {
-
+[data-theme="dark"] [data-testid="stFileUploader"] button:hover *,
+[data-theme="dark"] button[kind="secondary"]:hover *,
+[data-theme="dark"] button[kind="primary"]:hover * {
     color: #FFFFFF !important;
-
     fill: #FFFFFF !important;
-
     stroke: #FFFFFF !important;
-
 }
 
-
-/* =========================================================
-   DECORATIONS ABOVE BACKGROUND
-   ========================================================= */
-
+/* Decorative background stays behind the content */
 .main .block-container {
-
     isolation: isolate;
-
 }
-
 
 .main .block-container::before,
 .main .block-container::after {
-
     z-index: 0 !important;
-
 }
-
 
 .main .block-container > div {
-
     position: relative;
-
     z-index: 2;
-
 }
-
 
 /* =========================================================
    AI REVIEW OUTPUT
@@ -1033,29 +743,9 @@ button[kind="primary"]:hover * {
     color: #302936;
 
     box-shadow:
-        0 6px 20px rgba(
-            75,
-            55,
-            90,
-            0.06
-        );
+        0 6px 20px rgba(75, 55, 90, 0.06);
 
-    animation:
-        outputReveal 1.6s ease-out both;
-
-}
-
-
-.review-output p {
-
-    color: #302936 !important;
-
-    font-family:
-        "Times New Roman",
-        Times,
-        serif !important;
-
-    line-height: 1.75;
+    animation: outputReveal 1.6s ease-out both;
 
 }
 
@@ -1067,10 +757,26 @@ button[kind="primary"]:hover * {
         transform: translateY(25px);
     }
 
+    45% {
+        opacity: 0.25;
+        transform: translateY(15px);
+    }
+
     100% {
         opacity: 1;
         transform: translateY(0);
     }
+
+}
+
+
+.review-output p {
+
+    color: #302936 !important;
+
+    font-family: "Times New Roman", Times, serif !important;
+
+    line-height: 1.75;
 
 }
 
@@ -1085,8 +791,7 @@ button[kind="primary"]:hover * {
 
     box-shadow: none !important;
 
-    animation:
-        alertReveal 1s ease-out both;
+    animation: alertReveal 1s ease-out both;
 
 }
 
@@ -1133,32 +838,42 @@ hr {
 
 
 /* =========================================================
-   HIDE STREAMLIT DEFAULTS
+   HIDE DEFAULT STREAMLIT ELEMENTS
    ========================================================= */
 
 #MainMenu {
-
     visibility: hidden;
-
 }
-
 
 footer {
-
     visibility: hidden;
+}
 
+header {
+    background-color: transparent;
 }
 
 
-header {
+/* =========================================================
+   MOBILE
+   ========================================================= */
 
-    background-color: transparent;
+@media (max-width: 768px) {
+
+    h1 {
+        font-size: 2.3rem !important;
+    }
+
+    .main .block-container {
+        padding-left: 1.2rem;
+        padding-right: 1.2rem;
+    }
 
 }
 
 
 /* =========================================================
-   REVIEW CARDS
+   NEW REVIEW CARDS
    ========================================================= */
 
 .review-card {
@@ -1174,15 +889,9 @@ header {
     margin-top: 16px;
 
     box-shadow:
-        0 5px 18px rgba(
-            70,
-            50,
-            85,
-            0.05
-        );
+        0 5px 18px rgba(70, 50, 85, 0.05);
 
-    animation:
-        reviewCardAppear 0.8s ease-out both;
+    animation: reviewCardAppear 0.8s ease-out both;
 
     transition:
         transform 0.3s ease,
@@ -1202,10 +911,7 @@ header {
 
 .review-card-title {
 
-    font-family:
-        "Times New Roman",
-        Times,
-        serif;
+    font-family: "Times New Roman", Times, serif;
 
     font-size: 21px;
 
@@ -1220,10 +926,7 @@ header {
 
 .review-card-content {
 
-    font-family:
-        "Times New Roman",
-        Times,
-        serif;
+    font-family: "Times New Roman", Times, serif;
 
     font-size: 16px;
 
@@ -1255,44 +958,27 @@ header {
    ========================================================= */
 
 .summary-card {
-
     border-left: 4px solid #A996B7;
-
 }
-
 
 .bug-card {
-
     border-left: 4px solid #B89FAF;
-
 }
-
 
 .warning-card {
-
     border-left: 4px solid #C4AF93;
-
 }
-
 
 .security-card {
-
     border-left: 4px solid #9FAF9F;
-
 }
-
 
 .performance-card {
-
     border-left: 4px solid #A6A0B8;
-
 }
 
-
 .suggestion-card {
-
     border-left: 4px solid #B09CC0;
-
 }
 
 
@@ -1315,25 +1001,16 @@ header {
     text-align: center;
 
     box-shadow:
-        0 6px 20px rgba(
-            70,
-            50,
-            85,
-            0.06
-        );
+        0 6px 20px rgba(70, 50, 85, 0.06);
 
-    animation:
-        scoreAppear 1.2s ease-out both;
+    animation: scoreAppear 1.2s ease-out both;
 
 }
 
 
 .score-title {
 
-    font-family:
-        "Times New Roman",
-        Times,
-        serif;
+    font-family: "Times New Roman", Times, serif;
 
     font-size: 21px;
 
@@ -1346,10 +1023,7 @@ header {
 
 .score-number {
 
-    font-family:
-        "Times New Roman",
-        Times,
-        serif;
+    font-family: "Times New Roman", Times, serif;
 
     font-size: 54px;
 
@@ -1377,10 +1051,7 @@ header {
 
 .score-label {
 
-    font-family:
-        "Times New Roman",
-        Times,
-        serif;
+    font-family: "Times New Roman", Times, serif;
 
     font-size: 15px;
 
@@ -1392,7 +1063,7 @@ header {
 
 
 /* =========================================================
-   SCORE ANIMATIONS
+   CARD ANIMATIONS
    ========================================================= */
 
 @keyframes reviewCardAppear {
@@ -1422,9 +1093,7 @@ header {
 
         opacity: 0;
 
-        transform:
-            translateY(25px)
-            scale(0.98);
+        transform: translateY(25px) scale(0.98);
 
     }
 
@@ -1432,9 +1101,7 @@ header {
 
         opacity: 1;
 
-        transform:
-            translateY(0)
-            scale(1);
+        transform: translateY(0) scale(1);
 
     }
 
@@ -1446,185 +1113,113 @@ header {
    ========================================================= */
 
 .score-progress-container {
-
     margin-top: 18px;
-
 }
-
 
 .score-progress-bar {
-
     width: 100%;
-
     height: 10px;
-
     background-color: #EEE7F2;
-
     border-radius: 20px;
-
     overflow: hidden;
-
 }
-
 
 .score-progress-fill {
-
     height: 100%;
-
     border-radius: 20px;
-
     background-color: #817093;
-
-    animation:
-        progressFill 1.5s ease-out both;
-
+    animation: progressFill 1.5s ease-out both;
 }
-
 
 @keyframes progressFill {
-
     from {
-
         width: 0%;
-
     }
-
 }
-
 
 .score-category-label {
-
     display: flex;
-
     justify-content: space-between;
-
     align-items: center;
-
     margin-bottom: 7px;
-
-    font-family:
-        "Times New Roman",
-        Times,
-        serif;
-
+    font-family: "Times New Roman", Times, serif;
     font-size: 16px;
-
     color: #403646;
-
     font-weight: bold;
-
 }
-
 
 .phase3-score-card {
-
     background-color: #FFFFFF;
-
     border: 1px solid #DED3E7;
-
     border-radius: 20px;
-
     padding: 24px;
-
     margin-top: 16px;
-
-    box-shadow:
-        0 6px 20px rgba(
-            70,
-            50,
-            85,
-            0.06
-        );
-
-    animation:
-        reviewCardAppear 0.8s ease-out both;
-
+    box-shadow: 0 6px 20px rgba(70, 50, 85, 0.06);
+    animation: reviewCardAppear 0.8s ease-out both;
 }
 
-
 .phase3-score-number {
-
-    font-family:
-        "Times New Roman",
-        Times,
-        serif;
-
+    font-family: "Times New Roman", Times, serif;
     font-size: 32px;
-
     font-weight: bold;
-
     color: #756481;
-
 }
 
 
 /* =========================================================
-   DARK MODE — REVIEW CONTENT
+   DARK MODE — REFERENCE UI (DARK ONLY)
    ========================================================= */
-
+[data-theme="dark"] .stApp,
+[data-theme="dark"] [data-testid="stAppViewContainer"] { background-color:#10151F !important; color:#FFFFFF !important; }
+[data-theme="dark"] .stApp > div:first-child::before { background-color:#302B45 !important; opacity:.72 !important; z-index:0 !important; }
+[data-theme="dark"] .stApp > div:first-child::after { background-color:#2C2741 !important; opacity:.72 !important; z-index:0 !important; }
+[data-theme="dark"] .main .block-container::before,
+[data-theme="dark"] .main .block-container::after { display:none !important; }
+[data-theme="dark"] .main,
+[data-theme="dark"] .main .block-container { position:relative !important; z-index:10 !important; background-color:transparent !important; }
+[data-theme="dark"] .main .block-container > div { position:relative !important; z-index:11 !important; }
+[data-theme="dark"] h1 { color:#CDB8F3 !important; }
+[data-theme="dark"] h2,
+[data-theme="dark"] h3,
+[data-theme="dark"] p,
+[data-theme="dark"] label,
+[data-theme="dark"] [data-testid="stMarkdownContainer"] { color:#FFFFFF !important; }
+[data-theme="dark"] .stTextArea,
+[data-theme="dark"] [data-testid="stFileUploader"],
+[data-theme="dark"] .review-output,
+[data-theme="dark"] .review-card,
+[data-theme="dark"] .score-card,
+[data-theme="dark"] .phase3-score-card { background-color:#202733 !important; border:1px solid #50596B !important; border-color:#50596B !important; box-shadow:none !important; }
+[data-theme="dark"] .stTextArea textarea,
+[data-theme="dark"] [data-testid="stFileUploaderDropzone"] { background-color:#1C232E !important; color:#FFFFFF !important; border-color:#535D70 !important; }
+/* EVERY BUTTON — Upload colour + white text */
+[data-theme="dark"] .stButton > button,
+[data-theme="dark"] .stDownloadButton > button,
+[data-theme="dark"] [data-testid="stFileUploader"] button,
+[data-theme="dark"] button[kind="primary"],
+[data-theme="dark"] button[kind="secondary"] { background-color:#131720 !important; color:#FFFFFF !important; border:1px solid #252D3A !important; border-radius:13px !important; box-shadow:none !important; }
+[data-theme="dark"] .stButton > button *,
+[data-theme="dark"] .stDownloadButton > button *,
+[data-theme="dark"] [data-testid="stFileUploader"] button *,
+[data-theme="dark"] button[kind="primary"] *,
+[data-theme="dark"] button[kind="secondary"] * { color:#FFFFFF !important; fill:#FFFFFF !important; stroke:#FFFFFF !important; }
+[data-theme="dark"] .stButton > button:hover,
+[data-theme="dark"] .stDownloadButton > button:hover,
+[data-theme="dark"] [data-testid="stFileUploader"] button:hover,
+[data-theme="dark"] button[kind="primary"]:hover,
+[data-theme="dark"] button[kind="secondary"]:hover { background-color:#131720 !important; color:#FFFFFF !important; border-color:#3A4353 !important; }
+[data-theme="dark"] .stButton > button:hover *,
+[data-theme="dark"] .stDownloadButton > button:hover *,
+[data-theme="dark"] [data-testid="stFileUploader"] button:hover *,
+[data-theme="dark"] button[kind="primary"]:hover *,
+[data-theme="dark"] button[kind="secondary"]:hover * { color:#FFFFFF !important; fill:#FFFFFF !important; stroke:#FFFFFF !important; }
+[data-theme="dark"] hr { border-color:#343C4B !important; }
 [data-theme="dark"] .review-card-title,
 [data-theme="dark"] .review-card-content,
 [data-theme="dark"] .score-title,
 [data-theme="dark"] .score-label,
-[data-theme="dark"] .score-category-label {
-
-    color: #FFFFFF !important;
-
-}
-
-
-[data-theme="dark"] .score-number,
-[data-theme="dark"] .phase3-score-number {
-
-    color: #CBB5F5 !important;
-
-}
-
-
-[data-theme="dark"] .score-number span {
-
-    color: #D8D2DF !important;
-
-}
-
-
-[data-theme="dark"] .score-progress-bar {
-
-    background-color: #303744 !important;
-
-}
-
-
-/* =========================================================
-   MOBILE
-   ========================================================= */
-
-@media (max-width: 768px) {
-
-    h1 {
-
-        font-size: 2.3rem !important;
-
-    }
-
-    .main .block-container {
-
-        padding-left: 1.2rem !important;
-
-        padding-right: 1.2rem !important;
-
-        padding-top: 4rem !important;
-
-    }
-
-    .hero-subtitle {
-
-        font-size: 15px;
-
-    }
-
-}
-
+[data-theme="dark"] .score-category-label { color:#FFFFFF !important; }
+[data-theme="dark"] .score-number { color:#CDB8F3 !important; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -1635,23 +1230,14 @@ header {
 
 st.title("AI Code Review System")
 
-st.markdown(
-    """
-    <div class="hero-subtitle">
-        Effortlessly review and improve your code with AI assistance.
-    </div>
-    """,
-    unsafe_allow_html=True
-)
+st.write("Welcome to the AI-powered code review system!")
 
+st.subheader("Enter your code")
 
-# =========================================================
-# ENTER CODE
-# =========================================================
 
 code = st.text_area(
-    "Upload your code file",
-    height=120
+    "Paste your code below:",
+    height=300
 )
 
 
@@ -1666,9 +1252,7 @@ uploaded_file = st.file_uploader(
 # =========================================================
 
 source_code = code
-
 file_extension = "py"
-
 mime_type = "text/x-python"
 
 
@@ -1679,13 +1263,11 @@ if uploaded_file is not None:
     if uploaded_file.name.lower().endswith(".java"):
 
         file_extension = "java"
-
         mime_type = "text/x-java-source"
 
     else:
 
         file_extension = "py"
-
         mime_type = "text/x-python"
 
     st.text_area(
@@ -1838,8 +1420,8 @@ CODE TO REVIEW:
 """
 
                 response = client.chat.completions.create(
-                    model="openai/gpt-oss-120b",
-                    messages=[
+                model="openai/gpt-oss-120b",
+                messages=[
                         {
                             "role": "user",
                             "content": prompt
@@ -2274,22 +1856,17 @@ ORIGINAL SOURCE CODE:
 
 
                     improvement_response = client.chat.completions.create(
-                        model="openai/gpt-oss-120b",
-                        messages=[
-                            {
-                                "role": "user",
-                                "content": improvement_prompt
-                            }
-                        ],
-                        temperature=0.1
-                    )
+                    model="openai/gpt-oss-120b",
+                    messages=[
+                        {
+                            "role": "user",
+                            "content": improvement_prompt
+                        }
+                    ],
+                    temperature=0.1
+                )
 
-                    improved_code = (
-                        improvement_response
-                        .choices[0]
-                        .message
-                        .content
-                    )
+                    improved_code = improvement_response.choices[0].message.content
 
 
                     improved_code = re.sub(
