@@ -601,7 +601,7 @@ label {
 .stButton > button,
 .stDownloadButton > button {
 
-    background-color: #817093 !important;
+    background-color: #131720 !important;
 
     color: #FFFFFF !important;
 
@@ -649,7 +649,7 @@ label {
 .stButton > button:hover,
 .stDownloadButton > button:hover {
 
-    background-color: #705F80 !important;
+    background-color: #131720 !important;
 
     color: #FFFFFF !important;
 
