@@ -4,9 +4,15 @@ import re
 import html
 import textwrap
 
+
+# =========================================================
+# GROQ CLIENT
+# =========================================================
+
 client = Groq(
     api_key=st.secrets["GROQ_API_KEY"]
 )
+
 
 # =========================================================
 # REVIEW PARSER
@@ -109,11 +115,11 @@ def format_content(content):
 def render_card(card_class, title, content):
 
     card_html = f"""
-<div class="review-card {card_class}">
-    <div class="review-card-title">{title}</div>
-    <div class="review-card-content">{content}</div>
-</div>
-"""
+    <div class="review-card {card_class}">
+        <div class="review-card-title">{title}</div>
+        <div class="review-card-content">{content}</div>
+    </div>
+    """
 
     if hasattr(st, "html"):
 
@@ -128,107 +134,175 @@ def render_card(card_class, title, content):
 
 
 # =========================================================
-# GLOBAL CSS
+# GLOBAL DARK THEME CSS
 # =========================================================
 
-# Detect Streamlit dark theme so the reference dark UI is applied only in dark mode.
-is_dark_mode = st.get_option("theme.base") == "dark"
-
-st.markdown("""
+st.markdown(
+    """
 <style>
 
 /* =========================================================
-   GLOBAL WEBSITE
+   GLOBAL DARK WEBSITE
    ========================================================= */
+
+html,
+body,
+.stApp,
+[data-testid="stAppViewContainer"] {
+    background: #10151F !important;
+    color: #FFFFFF !important;
+}
+
+
+body {
+    font-family: "Times New Roman", Times, serif !important;
+    overflow-x: hidden !important;
+}
+
 
 .stApp {
-    background-color: #F6F1FA !important;
-    font-family: "Times New Roman", Times, serif !important;
-    color: #302936 !important;
-    overflow-x: hidden;
-}
-
-
-/* Keep content above decorative background */
-.main {
-    position: relative;
-    z-index: 10;
-}
-
-.main .block-container {
-    max-width: 1100px;
-    padding-top: 4rem;
-    padding-bottom: 5rem;
-    position: relative;
-    z-index: 10;
-
-    animation: pageReveal 2.2s ease-out both;
+    min-height: 100vh !important;
+    background:
+        radial-gradient(
+            circle at 20% 20%,
+            rgba(111, 76, 145, 0.08),
+            transparent 28%
+        ),
+        #10151F !important;
 }
 
 
 /* =========================================================
-   CLASSY BACKGROUND DECORATION
+   STREAMLIT HEADER
    ========================================================= */
 
-/* Large soft lavender shape — left */
-
-.stApp > div:first-child::before {
-    content: "";
-
-    position: fixed;
-
-    width: 360px;
-    height: 360px;
-
-    left: -180px;
-    top: 80px;
-
-    border-radius: 50%;
-
-    background-color: #E9DFF0;
-
-    opacity: 0.65;
-
-    z-index: 0;
-
-    pointer-events: none;
-
-    animation: floatLeft 12s ease-in-out infinite;
+[data-testid="stHeader"] {
+    background: transparent !important;
 }
 
 
-/* Large soft lavender shape — right */
-
-.stApp > div:first-child::after {
-    content: "";
-
-    position: fixed;
-
-    width: 300px;
-    height: 300px;
-
-    right: -140px;
-    bottom: 40px;
-
-    border-radius: 50%;
-
-    background-color: #E5D9ED;
-
-    opacity: 0.65;
-
-    z-index: 0;
-
-    pointer-events: none;
-
-    animation: floatRight 14s ease-in-out infinite;
+header {
+    background: transparent !important;
 }
 
 
 /* =========================================================
-   ABSTRACT RINGS
+   MAIN CONTENT LAYER
+   ========================================================= */
+
+.main {
+    position: relative !important;
+    z-index: 10 !important;
+}
+
+
+.main .block-container {
+    max-width: 1100px !important;
+
+    padding-top: 4rem !important;
+    padding-bottom: 5rem !important;
+
+    position: relative !important;
+    z-index: 10 !important;
+
+    isolation: isolate !important;
+
+    animation:
+        pageReveal
+        1.4s
+        ease-out
+        both;
+}
+
+
+/* Every Streamlit content block above decorations */
+
+.main .block-container > div {
+    position: relative !important;
+    z-index: 5 !important;
+}
+
+
+/* =========================================================
+   DARK BACKGROUND DECORATIVE BUBBLES
+   ========================================================= */
+
+.stApp > div:first-child::before {
+
+    content: "";
+
+    position: fixed;
+
+    width: 330px;
+    height: 330px;
+
+    left: -210px;
+    top: 60px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(109, 74, 145, 0.34),
+            rgba(69, 48, 96, 0.16)
+        );
+
+    opacity: 0.75;
+
+    z-index: 0 !important;
+
+    pointer-events: none !important;
+
+    animation:
+        floatLeft
+        12s
+        ease-in-out
+        infinite;
+}
+
+
+.stApp > div:first-child::after {
+
+    content: "";
+
+    position: fixed;
+
+    width: 330px;
+    height: 330px;
+
+    right: -180px;
+    bottom: -50px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(112, 76, 150, 0.38),
+            rgba(61, 43, 83, 0.16)
+        );
+
+    opacity: 0.75;
+
+    z-index: 0 !important;
+
+    pointer-events: none !important;
+
+    animation:
+        floatRight
+        14s
+        ease-in-out
+        infinite;
+}
+
+
+/* =========================================================
+   DECORATIVE RING
    ========================================================= */
 
 .main .block-container::before {
+
     content: "";
 
     position: fixed;
@@ -236,66 +310,78 @@ st.markdown("""
     width: 135px;
     height: 135px;
 
-    right: 9%;
-    top: 115px;
+    right: 8%;
+    top: 120px;
 
     border-radius: 50%;
 
-    border: 2px solid #D3C2DE;
+    border:
+        2px solid
+        rgba(166, 132, 202, 0.20);
 
-    opacity: 0.55;
+    opacity: 0.45;
 
-    z-index: 1;
+    z-index: 0 !important;
 
-    pointer-events: none;
+    pointer-events: none !important;
 
     box-shadow:
-        0 0 0 18px #EDE5F2,
-        0 0 0 36px #F0EAF5;
+        0 0 0 18px rgba(109, 78, 140, 0.06),
+        0 0 0 36px rgba(109, 78, 140, 0.035);
 
-    animation: ringFloat 11s ease-in-out infinite;
+    animation:
+        ringFloat
+        11s
+        ease-in-out
+        infinite;
 }
 
 
 /* =========================================================
-   LARGE DECORATIVE DOTS
+   DECORATIVE DOTS
    ========================================================= */
 
 .main .block-container::after {
+
     content: "";
 
     position: fixed;
 
-    width: 24px;
-    height: 24px;
+    width: 18px;
+    height: 18px;
 
-    left: 10%;
-    top: 38%;
+    left: 9%;
+    top: 40%;
 
     border-radius: 50%;
 
-    background-color: #D3C3DF;
+    background:
+        rgba(142, 108, 176, 0.25);
 
-    opacity: 0.7;
+    opacity: 0.5;
 
-    z-index: 1;
+    z-index: 0 !important;
 
-    pointer-events: none;
+    pointer-events: none !important;
 
     box-shadow:
 
-        95px 75px 0 #DED2E7,
-        220px -55px 0 #E6DDEA,
-        370px 90px 0 #D9CBE3,
-        520px -20px 0 #E4D9EA,
-        680px 100px 0 #DACDE5,
+        95px 75px 0 rgba(129, 94, 164, 0.20),
+        220px -55px 0 rgba(112, 81, 146, 0.18),
+        370px 90px 0 rgba(130, 96, 165, 0.17),
+        520px -20px 0 rgba(113, 81, 146, 0.16),
+        680px 100px 0 rgba(135, 99, 172, 0.18),
 
-        55px 300px 0 #E2D7E9,
-        240px 360px 0 #DCCFE6,
-        430px 280px 0 #E7DEED,
-        610px 390px 0 #DDD1E7;
+        55px 300px 0 rgba(118, 86, 151, 0.17),
+        240px 360px 0 rgba(130, 95, 165, 0.16),
+        430px 280px 0 rgba(115, 84, 148, 0.16),
+        610px 390px 0 rgba(135, 100, 170, 0.15);
 
-    animation: dotsFloat 13s ease-in-out infinite;
+    animation:
+        dotsFloat
+        13s
+        ease-in-out
+        infinite;
 }
 
 
@@ -305,82 +391,71 @@ st.markdown("""
 
 @keyframes floatLeft {
 
-    0%, 100% {
+    0%,
+    100% {
         transform: translate(0, 0);
     }
 
     50% {
         transform: translate(15px, -18px);
     }
-
 }
 
 
 @keyframes floatRight {
 
-    0%, 100% {
+    0%,
+    100% {
         transform: translate(0, 0);
     }
 
     50% {
         transform: translate(-12px, 15px);
     }
-
 }
 
 
 @keyframes ringFloat {
 
-    0%, 100% {
-        transform: translateY(0) rotate(0deg);
+    0%,
+    100% {
+        transform:
+            translateY(0)
+            rotate(0deg);
     }
 
     50% {
-        transform: translateY(-12px) rotate(5deg);
+        transform:
+            translateY(-12px)
+            rotate(5deg);
     }
-
 }
 
 
 @keyframes dotsFloat {
 
-    0%, 100% {
+    0%,
+    100% {
         transform: translateY(0);
     }
 
     50% {
         transform: translateY(-7px);
     }
-
 }
 
-
-/* =========================================================
-   SLOW WEBSITE TEXT ANIMATION
-   ========================================================= */
 
 @keyframes pageReveal {
 
     0% {
         opacity: 0;
-        transform: translateY(30px);
-    }
-
-    35% {
-        opacity: 0.2;
-        transform: translateY(22px);
-    }
-
-    70% {
-        opacity: 0.65;
-        transform: translateY(8px);
+        transform: translateY(25px);
     }
 
     100% {
         opacity: 1;
         transform: translateY(0);
     }
-
 }
 
 
@@ -389,9 +464,13 @@ st.markdown("""
    ========================================================= */
 
 h1 {
-    color: #302936 !important;
 
-    font-family: "Times New Roman", Times, serif !important;
+    color: #D3B9F7 !important;
+
+    font-family:
+        "Times New Roman",
+        Times,
+        serif !important;
 
     font-size: 3.3rem !important;
 
@@ -399,9 +478,19 @@ h1 {
 
     font-style: italic !important;
 
-    letter-spacing: -0.7px;
+    text-align: center !important;
 
-    animation: titleReveal 2.5s ease-out both;
+    letter-spacing: -0.7px !important;
+
+    text-shadow:
+        0 0 18px
+        rgba(186, 145, 231, 0.20) !important;
+
+    animation:
+        titleReveal
+        1.7s
+        ease-out
+        both;
 }
 
 
@@ -412,16 +501,10 @@ h1 {
         transform: translateY(25px);
     }
 
-    45% {
-        opacity: 0.3;
-        transform: translateY(15px);
-    }
-
     100% {
         opacity: 1;
         transform: translateY(0);
     }
-
 }
 
 
@@ -431,13 +514,25 @@ h1 {
 
 h2,
 h3 {
-    color: #382F3E !important;
 
-    font-family: "Times New Roman", Times, serif !important;
+    color: #FFFFFF !important;
+
+    font-family:
+        "Times New Roman",
+        Times,
+        serif !important;
 
     font-weight: bold !important;
+}
 
-    animation: textReveal 1.6s ease-out both;
+
+h2 {
+    color: #D3B9F7 !important;
+}
+
+
+h3 {
+    color: #FFFFFF !important;
 }
 
 
@@ -445,310 +540,915 @@ h3 {
    BODY TEXT
    ========================================================= */
 
+p,
+span,
+label,
+div {
+
+    font-family:
+        "Times New Roman",
+        Times,
+        serif;
+}
+
+
 p {
-    color: #433948 !important;
 
-    font-family: "Times New Roman", Times, serif !important;
+    color: #FFFFFF !important;
 
-    animation: textReveal 1.8s ease-out both;
+    line-height: 1.7 !important;
 }
 
 
 label {
-    color: #382F3E !important;
 
-    font-family: "Times New Roman", Times, serif !important;
+    color: #FFFFFF !important;
 
     font-weight: bold !important;
 }
 
 
-/* Text animation */
+/* Streamlit markdown */
 
-@keyframes textReveal {
+[data-testid="stMarkdownContainer"],
+[data-testid="stMarkdownContainer"] p,
+[data-testid="stMarkdownContainer"] span {
 
-    from {
-        opacity: 0;
-        transform: translateY(12px);
-    }
+    color: #FFFFFF !important;
+}
 
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
 
+/* Widget labels */
+
+[data-testid="stWidgetLabel"],
+[data-testid="stWidgetLabel"] *,
+[data-testid="stFileUploaderDropzoneInstructions"],
+[data-testid="stFileUploaderDropzoneInstructions"] * {
+
+    color: #FFFFFF !important;
 }
 
 
 /* =========================================================
-   CODE INPUT CARD
+   TEXT AREA OUTER CARD
    ========================================================= */
 
 .stTextArea {
 
-    background-color: #FFFFFF !important;
+    background:
+        linear-gradient(
+            145deg,
+            #1B2430,
+            #18202B
+        ) !important;
 
-    padding: 20px !important;
+    border:
+        1px solid
+        #465163 !important;
 
-    border-radius: 20px !important;
+    border-radius:
+        18px !important;
 
-    border: 1px solid #DDD2E6 !important;
+    padding:
+        20px !important;
 
     box-shadow:
-        0 6px 20px rgba(75, 55, 90, 0.06);
+        0 8px 25px
+        rgba(0, 0, 0, 0.25) !important;
 
     transition:
-        transform 0.35s ease,
-        border-color 0.35s ease;
-
+        transform 0.3s ease,
+        border-color 0.3s ease !important;
 }
 
 
 .stTextArea:hover {
 
-    transform: translateY(-3px);
+    transform:
+        translateY(-2px);
 
-    border-color: #BCAAC9 !important;
-
+    border-color:
+        #667187 !important;
 }
 
 
+/* =========================================================
+   TEXT AREA INPUT
+   ========================================================= */
+
 .stTextArea textarea {
 
-    background-color: #FCFAFE !important;
+    background:
+        #151C27 !important;
 
-    color: #302936 !important;
+    color:
+        #FFFFFF !important;
 
-    border: 1px solid #DED4E7 !important;
+    caret-color:
+        #FFFFFF !important;
 
-    border-radius: 14px !important;
+    border:
+        1px solid
+        #505B6D !important;
 
-    padding: 17px !important;
+    border-radius:
+        15px !important;
 
-    font-family: "Times New Roman", Times, serif !important;
+    padding:
+        17px !important;
 
-    font-size: 16px !important;
+    font-family:
+        "Times New Roman",
+        Times,
+        serif !important;
 
-    line-height: 1.6 !important;
+    font-size:
+        16px !important;
 
-    box-shadow: none !important;
+    line-height:
+        1.6 !important;
 
+    box-shadow:
+        none !important;
 }
 
 
 .stTextArea textarea:focus {
 
-    border-color: #A995B7 !important;
+    background:
+        #151C27 !important;
 
-    box-shadow: none !important;
+    color:
+        #FFFFFF !important;
 
+    border-color:
+        #8C78A7 !important;
+
+    outline:
+        none !important;
+
+    box-shadow:
+        0 0 0 1px
+        rgba(140, 120, 167, 0.25) !important;
+}
+
+
+.stTextArea textarea::placeholder {
+
+    color:
+        #9EA8B8 !important;
+
+    opacity:
+        1 !important;
 }
 
 
 /* =========================================================
-   FILE UPLOADER
+   FILE UPLOADER OUTER CARD
    ========================================================= */
 
 [data-testid="stFileUploader"] {
 
-    background-color: #FFFFFF !important;
+    background:
+        linear-gradient(
+            145deg,
+            #1B2430,
+            #18202B
+        ) !important;
 
-    border: 1px solid #DDD2E6 !important;
+    border:
+        1px solid
+        #465163 !important;
 
-    border-radius: 20px !important;
+    border-radius:
+        18px !important;
 
-    padding: 20px !important;
+    padding:
+        20px !important;
 
     box-shadow:
-        0 6px 20px rgba(75, 55, 90, 0.06);
+        0 8px 25px
+        rgba(0, 0, 0, 0.25) !important;
 
     transition:
-        transform 0.35s ease,
-        border-color 0.35s ease;
-
+        transform 0.3s ease,
+        border-color 0.3s ease !important;
 }
 
 
 [data-testid="stFileUploader"]:hover {
 
-    transform: translateY(-3px);
+    transform:
+        translateY(-2px);
 
-    border-color: #BCAAC9 !important;
-
-}
-
-
-[data-testid="stFileUploaderDropzone"] {
-
-    background-color: #FBF9FE !important;
-
-    border: 1px dashed #BDAFC9 !important;
-
-    border-radius: 15px !important;
-
+    border-color:
+        #667187 !important;
 }
 
 
 /* =========================================================
-   ALL BUTTONS — DARK MODE TEXT FIX
+   FILE UPLOADER DROPZONE
+   ========================================================= */
+
+[data-testid="stFileUploaderDropzone"] {
+
+    background:
+        #151C27 !important;
+
+    border:
+        1px solid
+        #505B6D !important;
+
+    border-radius:
+        15px !important;
+}
+
+
+/* =========================================================
+   UPLOAD BUTTON
+   ========================================================= */
+
+[data-testid="stFileUploaderDropzone"] button {
+
+    background:
+        #111722 !important;
+
+    color:
+        #FFFFFF !important;
+
+    border:
+        1px solid
+        #303B4D !important;
+
+    border-radius:
+        12px !important;
+
+    font-family:
+        "Times New Roman",
+        Times,
+        serif !important;
+
+    font-size:
+        16px !important;
+
+    font-weight:
+        bold !important;
+
+    box-shadow:
+        none !important;
+}
+
+
+/* FORCE UPLOAD BUTTON TEXT WHITE */
+
+[data-testid="stFileUploaderDropzone"] button,
+[data-testid="stFileUploaderDropzone"] button *,
+[data-testid="stFileUploaderDropzone"] button p,
+[data-testid="stFileUploaderDropzone"] button span,
+[data-testid="stFileUploaderDropzone"] button div {
+
+    color:
+        #FFFFFF !important;
+
+    fill:
+        #FFFFFF !important;
+
+    stroke:
+        #FFFFFF !important;
+}
+
+
+[data-testid="stFileUploaderDropzone"] button:hover {
+
+    background:
+        #171E2A !important;
+
+    color:
+        #FFFFFF !important;
+
+    border-color:
+        #68758B !important;
+}
+
+
+[data-testid="stFileUploaderDropzone"] button:hover * {
+
+    color:
+        #FFFFFF !important;
+
+    fill:
+        #FFFFFF !important;
+}
+
+
+/* =========================================================
+   ALL NORMAL BUTTONS
    ========================================================= */
 
 .stButton > button,
 .stDownloadButton > button {
 
-    background-color: #817093 !important;
+    background:
+        #111722 !important;
 
-    color: #FFFFFF !important;
+    color:
+        #FFFFFF !important;
 
-    border: none !important;
+    border:
+        1px solid
+        #303B4D !important;
 
-    border-radius: 13px !important;
+    border-radius:
+        13px !important;
 
-    padding: 0.75rem 1.9rem !important;
+    padding:
+        0.75rem 1.9rem !important;
 
-    font-family: "Times New Roman", Times, serif !important;
+    font-family:
+        "Times New Roman",
+        Times,
+        serif !important;
 
-    font-size: 17px !important;
+    font-size:
+        17px !important;
 
-    font-weight: bold !important;
+    font-weight:
+        bold !important;
 
-    font-style: italic !important;
+    font-style:
+        italic !important;
 
-    box-shadow: none !important;
+    box-shadow:
+        none !important;
 
     transition:
         transform 0.3s ease,
-        background-color 0.3s ease;
-
-}
-
-
-/* Force ALL button text to remain WHITE in dark mode */
-
-.stButton > button *,
-.stDownloadButton > button * {
-
-    color: #FFFFFF !important;
-
-    fill: #FFFFFF !important;
-
-    font-family: "Times New Roman", Times, serif !important;
-
-    font-weight: bold !important;
-
-}
-
-
-/* Button hover */
-
-.stButton > button:hover,
-.stDownloadButton > button:hover {
-
-    background-color: #705F80 !important;
-
-    color: #FFFFFF !important;
-
-    transform: translateY(-3px);
-
-}
-
-
-/* Keep button text WHITE on hover */
-
-.stButton > button:hover *,
-.stDownloadButton > button:hover * {
-
-    color: #FFFFFF !important;
-
-    fill: #FFFFFF !important;
-
+        background-color 0.3s ease,
+        border-color 0.3s ease !important;
 }
 
 
 /* =========================================================
-   AI REVIEW OUTPUT
+   FORCE BUTTON TEXT WHITE
+   ========================================================= */
+
+.stButton > button *,
+.stButton > button p,
+.stButton > button span,
+.stButton > button div,
+
+.stDownloadButton > button *,
+.stDownloadButton > button p,
+.stDownloadButton > button span,
+.stDownloadButton > button div {
+
+    color:
+        #FFFFFF !important;
+
+    fill:
+        #FFFFFF !important;
+
+    stroke:
+        #FFFFFF !important;
+
+    font-family:
+        "Times New Roman",
+        Times,
+        serif !important;
+
+    font-weight:
+        bold !important;
+}
+
+
+/* =========================================================
+   BUTTON HOVER
+   ========================================================= */
+
+.stButton > button:hover,
+.stDownloadButton > button:hover {
+
+    background:
+        #171E2A !important;
+
+    color:
+        #FFFFFF !important;
+
+    border-color:
+        #68758B !important;
+
+    transform:
+        translateY(-2px) !important;
+}
+
+
+.stButton > button:hover *,
+.stDownloadButton > button:hover * {
+
+    color:
+        #FFFFFF !important;
+
+    fill:
+        #FFFFFF !important;
+
+    stroke:
+        #FFFFFF !important;
+}
+
+
+/* =========================================================
+   REVIEW OUTPUT
    ========================================================= */
 
 .review-output {
 
-    background-color: #FFFFFF;
+    background:
+        #1B2430 !important;
 
-    border: 1px solid #DDD2E6;
+    border:
+        1px solid
+        #465163 !important;
 
-    border-radius: 20px;
+    border-radius:
+        18px !important;
 
-    padding: 28px;
+    padding:
+        28px !important;
 
-    margin-top: 18px;
+    margin-top:
+        18px !important;
 
-    color: #302936;
+    color:
+        #FFFFFF !important;
 
     box-shadow:
-        0 6px 20px rgba(75, 55, 90, 0.06);
-
-    animation: outputReveal 1.6s ease-out both;
-
-}
-
-
-@keyframes outputReveal {
-
-    0% {
-        opacity: 0;
-        transform: translateY(25px);
-    }
-
-    45% {
-        opacity: 0.25;
-        transform: translateY(15px);
-    }
-
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-
+        0 8px 25px
+        rgba(0, 0, 0, 0.25) !important;
 }
 
 
 .review-output p {
 
-    color: #302936 !important;
+    color:
+        #FFFFFF !important;
 
-    font-family: "Times New Roman", Times, serif !important;
+    font-family:
+        "Times New Roman",
+        Times,
+        serif !important;
 
-    line-height: 1.75;
-
+    line-height:
+        1.75 !important;
 }
 
 
 /* =========================================================
-   SUCCESS MESSAGE
+   REVIEW CARDS
    ========================================================= */
 
-.stAlert {
+.review-card {
 
-    border-radius: 15px !important;
+    background:
+        linear-gradient(
+            145deg,
+            #1B2430,
+            #18202B
+        ) !important;
 
-    box-shadow: none !important;
+    border:
+        1px solid
+        #465163 !important;
 
-    animation: alertReveal 1s ease-out both;
+    border-radius:
+        18px !important;
 
+    padding:
+        24px !important;
+
+    margin-top:
+        16px !important;
+
+    color:
+        #FFFFFF !important;
+
+    box-shadow:
+        0 8px 24px
+        rgba(0, 0, 0, 0.22) !important;
+
+    transition:
+        transform 0.3s ease,
+        border-color 0.3s ease !important;
+
+    animation:
+        reviewCardAppear
+        0.8s
+        ease-out
+        both;
 }
 
 
-@keyframes alertReveal {
+.review-card:hover {
+
+    transform:
+        translateY(-3px);
+
+    border-color:
+        #69758A !important;
+}
+
+
+.review-card-title {
+
+    font-family:
+        "Times New Roman",
+        Times,
+        serif !important;
+
+    font-size:
+        21px !important;
+
+    font-weight:
+        bold !important;
+
+    color:
+        #D3B9F7 !important;
+
+    margin-bottom:
+        14px !important;
+}
+
+
+.review-card-content {
+
+    font-family:
+        "Times New Roman",
+        Times,
+        serif !important;
+
+    font-size:
+        16px !important;
+
+    line-height:
+        1.7 !important;
+
+    color:
+        #FFFFFF !important;
+}
+
+
+.review-text,
+.review-item {
+
+    color:
+        #FFFFFF !important;
+
+    font-family:
+        "Times New Roman",
+        Times,
+        serif !important;
+}
+
+
+.review-text {
+
+    margin-bottom:
+        6px !important;
+}
+
+
+.review-item {
+
+    margin-bottom:
+        8px !important;
+
+    padding-left:
+        4px !important;
+}
+
+
+/* =========================================================
+   CARD ACCENTS
+   ========================================================= */
+
+.summary-card {
+    border-left:
+        4px solid #9D7BC2 !important;
+}
+
+.bug-card {
+    border-left:
+        4px solid #A97C91 !important;
+}
+
+.warning-card {
+    border-left:
+        4px solid #B59A72 !important;
+}
+
+.security-card {
+    border-left:
+        4px solid #789B8C !important;
+}
+
+.performance-card {
+    border-left:
+        4px solid #837DAA !important;
+}
+
+.suggestion-card {
+    border-left:
+        4px solid #9878B5 !important;
+}
+
+
+/* =========================================================
+   SCORE CARD
+   ========================================================= */
+
+.score-card {
+
+    background:
+        linear-gradient(
+            145deg,
+            #1B2430,
+            #18202B
+        ) !important;
+
+    border:
+        1px solid
+        #465163 !important;
+
+    border-radius:
+        20px !important;
+
+    padding:
+        30px !important;
+
+    margin-top:
+        18px !important;
+
+    text-align:
+        center !important;
+
+    color:
+        #FFFFFF !important;
+
+    box-shadow:
+        0 8px 25px
+        rgba(0, 0, 0, 0.25) !important;
+}
+
+
+.score-title {
+
+    font-family:
+        "Times New Roman",
+        Times,
+        serif !important;
+
+    font-size:
+        21px !important;
+
+    font-weight:
+        bold !important;
+
+    color:
+        #FFFFFF !important;
+}
+
+
+.score-number {
+
+    font-family:
+        "Times New Roman",
+        Times,
+        serif !important;
+
+    font-size:
+        54px !important;
+
+    font-weight:
+        bold !important;
+
+    font-style:
+        italic !important;
+
+    color:
+        #D3B9F7 !important;
+
+    margin-top:
+        10px !important;
+}
+
+
+.score-number span {
+
+    font-size:
+        24px !important;
+
+    color:
+        #C5CBD5 !important;
+
+    font-style:
+        normal !important;
+}
+
+
+.score-label {
+
+    font-family:
+        "Times New Roman",
+        Times,
+        serif !important;
+
+    font-size:
+        15px !important;
+
+    color:
+        #C5CBD5 !important;
+
+    margin-top:
+        4px !important;
+}
+
+
+/* =========================================================
+   SCORE PROGRESS
+   ========================================================= */
+
+.score-progress-container {
+    margin-top: 18px;
+}
+
+
+.score-progress-bar {
+
+    width:
+        100%;
+
+    height:
+        10px;
+
+    background:
+        #303A4A !important;
+
+    border-radius:
+        20px;
+
+    overflow:
+        hidden;
+}
+
+
+.score-progress-fill {
+
+    height:
+        100%;
+
+    border-radius:
+        20px;
+
+    background:
+        #817093 !important;
+
+    animation:
+        progressFill
+        1.5s
+        ease-out
+        both;
+}
+
+
+@keyframes progressFill {
 
     from {
-        opacity: 0;
-        transform: translateY(-8px);
+        width: 0%;
     }
+}
 
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
 
+.score-category-label {
+
+    display:
+        flex;
+
+    justify-content:
+        space-between;
+
+    align-items:
+        center;
+
+    margin-bottom:
+        7px;
+
+    font-family:
+        "Times New Roman",
+        Times,
+        serif !important;
+
+    font-size:
+        16px;
+
+    color:
+        #FFFFFF !important;
+
+    font-weight:
+        bold;
+}
+
+
+.phase3-score-card {
+
+    background:
+        linear-gradient(
+            145deg,
+            #1B2430,
+            #18202B
+        ) !important;
+
+    border:
+        1px solid
+        #465163 !important;
+
+    border-radius:
+        20px;
+
+    padding:
+        24px;
+
+    margin-top:
+        16px;
+
+    color:
+        #FFFFFF !important;
+
+    box-shadow:
+        0 8px 24px
+        rgba(0, 0, 0, 0.22) !important;
+}
+
+
+.phase3-score-number {
+
+    font-family:
+        "Times New Roman",
+        Times,
+        serif;
+
+    font-size:
+        32px;
+
+    font-weight:
+        bold;
+
+    color:
+        #D3B9F7 !important;
+}
+
+
+/* =========================================================
+   SUCCESS / WARNING / ERROR
+   ========================================================= */
+
+[data-testid="stAlert"] {
+
+    background:
+        #1B2430 !important;
+
+    border:
+        1px solid
+        #465163 !important;
+
+    color:
+        #FFFFFF !important;
+
+    border-radius:
+        15px !important;
+}
+
+
+[data-testid="stAlert"] * {
+
+    color:
+        #FFFFFF !important;
+}
+
+
+/* =========================================================
+   SPINNER
+   ========================================================= */
+
+[data-testid="stSpinner"] {
+
+    color:
+        #FFFFFF !important;
+}
+
+
+[data-testid="stSpinner"] * {
+
+    color:
+        #FFFFFF !important;
 }
 
 
@@ -758,12 +1458,17 @@ label {
 
 hr {
 
-    border-color: #DDD2E6 !important;
+    border-color:
+        #303A4A !important;
 
-    margin-top: 2rem;
+    opacity:
+        1 !important;
 
-    margin-bottom: 2rem;
+    margin-top:
+        2rem !important;
 
+    margin-bottom:
+        2rem !important;
 }
 
 
@@ -773,25 +1478,46 @@ hr {
 
 .stCodeBlock {
 
-    border-radius: 15px !important;
+    border:
+        1px solid
+        #465163 !important;
 
+    border-radius:
+        15px !important;
+
+    overflow:
+        hidden !important;
 }
 
 
 /* =========================================================
-   HIDE DEFAULT STREAMLIT ELEMENTS
+   STREAMLIT CODE TEXT
+   ========================================================= */
+
+[data-testid="stCodeBlock"] {
+
+    background:
+        #111722 !important;
+
+    border:
+        1px solid
+        #465163 !important;
+}
+
+
+/* =========================================================
+   HIDE DEFAULT STREAMLIT UI
    ========================================================= */
 
 #MainMenu {
-    visibility: hidden;
+    visibility:
+        hidden;
 }
+
 
 footer {
-    visibility: hidden;
-}
-
-header {
-    background-color: transparent;
+    visibility:
+        hidden;
 }
 
 
@@ -802,555 +1528,104 @@ header {
 @media (max-width: 768px) {
 
     h1 {
-        font-size: 2.3rem !important;
+
+        font-size:
+            2.3rem !important;
     }
 
     .main .block-container {
-        padding-left: 1.2rem;
-        padding-right: 1.2rem;
-    }
 
+        padding-left:
+            1.2rem !important;
+
+        padding-right:
+            1.2rem !important;
+    }
 }
 
 
 /* =========================================================
-   NEW REVIEW CARDS
+   EXTRA DARK MODE SAFETY
    ========================================================= */
 
-.review-card {
+[data-testid="stAppViewContainer"] *,
+[data-testid="stVerticalBlock"] {
 
-    background-color: #FFFFFF;
-
-    border: 1px solid #DED3E7;
-
-    border-radius: 18px;
-
-    padding: 24px;
-
-    margin-top: 16px;
-
-    box-shadow:
-        0 5px 18px rgba(70, 50, 85, 0.05);
-
-    animation: reviewCardAppear 0.8s ease-out both;
-
-    transition:
-        transform 0.3s ease,
-        border-color 0.3s ease;
-
+    scrollbar-color:
+        #465163
+        #10151F;
 }
 
 
-.review-card:hover {
+/* Scrollbar */
 
-    transform: translateY(-3px);
+::-webkit-scrollbar {
 
-    border-color: #C7B7D3;
-
+    width:
+        8px;
 }
 
 
-.review-card-title {
+::-webkit-scrollbar-track {
 
-    font-family: "Times New Roman", Times, serif;
-
-    font-size: 21px;
-
-    font-weight: bold;
-
-    color: #352D3B;
-
-    margin-bottom: 14px;
-
+    background:
+        #10151F;
 }
 
 
-.review-card-content {
+::-webkit-scrollbar-thumb {
 
-    font-family: "Times New Roman", Times, serif;
+    background:
+        #465163;
 
-    font-size: 16px;
-
-    line-height: 1.7;
-
-    color: #403646;
-
+    border-radius:
+        10px;
 }
 
 
-.review-text {
+::-webkit-scrollbar-thumb:hover {
 
-    margin-bottom: 6px;
-
+    background:
+        #68758B;
 }
 
-
-.review-item {
-
-    margin-bottom: 8px;
-
-    padding-left: 4px;
-
-}
-
-
-/* =========================================================
-   CARD ACCENTS
-   ========================================================= */
-
-.summary-card {
-    border-left: 4px solid #A996B7;
-}
-
-.bug-card {
-    border-left: 4px solid #B89FAF;
-}
-
-.warning-card {
-    border-left: 4px solid #C4AF93;
-}
-
-.security-card {
-    border-left: 4px solid #9FAF9F;
-}
-
-.performance-card {
-    border-left: 4px solid #A6A0B8;
-}
-
-.suggestion-card {
-    border-left: 4px solid #B09CC0;
-}
-
-
-/* =========================================================
-   SCORE CARD
-   ========================================================= */
-
-.score-card {
-
-    background-color: #FFFFFF;
-
-    border: 1px solid #DED3E7;
-
-    border-radius: 20px;
-
-    padding: 30px;
-
-    margin-top: 18px;
-
-    text-align: center;
-
-    box-shadow:
-        0 6px 20px rgba(70, 50, 85, 0.06);
-
-    animation: scoreAppear 1.2s ease-out both;
-
-}
-
-
-.score-title {
-
-    font-family: "Times New Roman", Times, serif;
-
-    font-size: 21px;
-
-    font-weight: bold;
-
-    color: #352D3B;
-
-}
-
-
-.score-number {
-
-    font-family: "Times New Roman", Times, serif;
-
-    font-size: 54px;
-
-    font-weight: bold;
-
-    font-style: italic;
-
-    color: #756481;
-
-    margin-top: 10px;
-
-}
-
-
-.score-number span {
-
-    font-size: 24px;
-
-    color: #766B7D;
-
-    font-style: normal;
-
-}
-
-
-.score-label {
-
-    font-family: "Times New Roman", Times, serif;
-
-    font-size: 15px;
-
-    color: #766B7D;
-
-    margin-top: 4px;
-
-}
-
-
-/* =========================================================
-   CARD ANIMATIONS
-   ========================================================= */
-
-@keyframes reviewCardAppear {
-
-    from {
-
-        opacity: 0;
-
-        transform: translateY(18px);
-
-    }
-
-    to {
-
-        opacity: 1;
-
-        transform: translateY(0);
-
-    }
-
-}
-
-
-@keyframes scoreAppear {
-
-    from {
-
-        opacity: 0;
-
-        transform: translateY(25px) scale(0.98);
-
-    }
-
-    to {
-
-        opacity: 1;
-
-        transform: translateY(0) scale(1);
-
-    }
-
-}
-
-
-/* =========================================================
-   PHASE 3 — SCORE PROGRESS BARS
-   ========================================================= */
-
-.score-progress-container {
-    margin-top: 18px;
-}
-
-.score-progress-bar {
-    width: 100%;
-    height: 10px;
-    background-color: #EEE7F2;
-    border-radius: 20px;
-    overflow: hidden;
-}
-
-.score-progress-fill {
-    height: 100%;
-    border-radius: 20px;
-    background-color: #817093;
-    animation: progressFill 1.5s ease-out both;
-}
-
-@keyframes progressFill {
-    from {
-        width: 0%;
-    }
-}
-
-.score-category-label {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 7px;
-    font-family: "Times New Roman", Times, serif;
-    font-size: 16px;
-    color: #403646;
-    font-weight: bold;
-}
-
-.phase3-score-card {
-    background-color: #FFFFFF;
-    border: 1px solid #DED3E7;
-    border-radius: 20px;
-    padding: 24px;
-    margin-top: 16px;
-    box-shadow: 0 6px 20px rgba(70, 50, 85, 0.06);
-    animation: reviewCardAppear 0.8s ease-out both;
-}
-
-.phase3-score-number {
-    font-family: "Times New Roman", Times, serif;
-    font-size: 32px;
-    font-weight: bold;
-    color: #756481;
-}
 
 </style>
-
-""", unsafe_allow_html=True)
-
-# =========================================================
-# DARK MODE — REFERENCE UI
-# =========================================================
-
-if is_dark_mode:
-    st.markdown("""
-    <style>
-
-    /* Background */
-    .stApp,
-    [data-testid="stAppViewContainer"],
-    [data-testid="stHeader"] {
-        background: #10151F !important;
-        color: #FFFFFF !important;
-    }
-
-    .main,
-    .main .block-container {
-        background: transparent !important;
-        color: #FFFFFF !important;
-    }
-
-    /* Keep every decorative shape strictly behind the UI */
-    .stApp > div:first-child::before,
-    .stApp > div:first-child::after,
-    .main .block-container::before,
-    .main .block-container::after {
-        z-index: 0 !important;
-        pointer-events: none !important;
-    }
-
-    .main .block-container > div {
-        position: relative !important;
-        z-index: 5 !important;
-    }
-
-    /* Main heading */
-    h1 {
-        color: #D3B9F7 !important;
-        text-align: center !important;
-        font-family: "Times New Roman", Times, serif !important;
-        font-weight: bold !important;
-        font-style: italic !important;
-    }
-
-    h2,
-    h3,
-    label,
-    p,
-    [data-testid="stMarkdownContainer"],
-    [data-testid="stMarkdownContainer"] p,
-    [data-testid="stWidgetLabel"],
-    [data-testid="stWidgetLabel"] p {
-        color: #FFFFFF !important;
-        font-family: "Times New Roman", Times, serif !important;
-    }
-
-    /* Input / textarea card */
-    .stTextArea {
-        background: #1D2633 !important;
-        border: 1px solid #4B5668 !important;
-        border-radius: 18px !important;
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.20) !important;
-    }
-
-    .stTextArea textarea {
-        background: #1B2330 !important;
-        color: #FFFFFF !important;
-        border: 1px solid #566174 !important;
-        border-radius: 15px !important;
-        caret-color: #FFFFFF !important;
-    }
-
-    .stTextArea textarea::placeholder {
-        color: #AEB7C5 !important;
-    }
-
-    .stTextArea textarea:focus {
-        background: #1B2330 !important;
-        color: #FFFFFF !important;
-        border-color: #68758B !important;
-        box-shadow: none !important;
-    }
-
-    /* File uploader outer card */
-    [data-testid="stFileUploader"] {
-        background: #1D2633 !important;
-        border: 1px solid #4B5668 !important;
-        border-radius: 18px !important;
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.20) !important;
-    }
-
-    /* File uploader drop area */
-    [data-testid="stFileUploaderDropzone"] {
-        background: #1B2330 !important;
-        border: 1px solid #566174 !important;
-        border-radius: 15px !important;
-    }
-
-    /* EVERY real button — white label text */
-    .stButton > button,
-    .stDownloadButton > button,
-    [data-testid="stFileUploader"] button,
-    button[kind="primary"],
-    button[kind="secondary"] {
-        background: #111722 !important;
-        color: #FFFFFF !important;
-        border: 1px solid #303B4D !important;
-        border-radius: 13px !important;
-        font-family: "Times New Roman", Times, serif !important;
-        font-weight: bold !important;
-        font-style: italic !important;
-        box-shadow: none !important;
-    }
-
-    /* Force the actual label nodes inside buttons to white */
-    .stButton > button p,
-    .stButton > button span,
-    .stButton > button div,
-    .stDownloadButton > button p,
-    .stDownloadButton > button span,
-    .stDownloadButton > button div,
-    [data-testid="stFileUploader"] button p,
-    [data-testid="stFileUploader"] button span,
-    [data-testid="stFileUploader"] button div,
-    button[kind="primary"] p,
-    button[kind="primary"] span,
-    button[kind="primary"] div,
-    button[kind="secondary"] p,
-    button[kind="secondary"] span,
-    button[kind="secondary"] div {
-        color: #FFFFFF !important;
-        fill: #FFFFFF !important;
-        stroke: #FFFFFF !important;
-        font-family: "Times New Roman", Times, serif !important;
-        font-weight: bold !important;
-    }
-
-    .stButton > button:hover,
-    .stDownloadButton > button:hover,
-    [data-testid="stFileUploader"] button:hover,
-    button[kind="primary"]:hover,
-    button[kind="secondary"]:hover {
-        background: #111722 !important;
-        color: #FFFFFF !important;
-        border-color: #455268 !important;
-        transform: translateY(-2px);
-    }
-
-    .stButton > button:hover p,
-    .stButton > button:hover span,
-    .stButton > button:hover div,
-    .stDownloadButton > button:hover p,
-    .stDownloadButton > button:hover span,
-    .stDownloadButton > button:hover div,
-    [data-testid="stFileUploader"] button:hover p,
-    [data-testid="stFileUploader"] button:hover span,
-    [data-testid="stFileUploader"] button:hover div {
-        color: #FFFFFF !important;
-        fill: #FFFFFF !important;
-        stroke: #FFFFFF !important;
-    }
-
-    /* Review/output cards */
-    .review-output,
-    .review-card,
-    .score-card,
-    .phase3-score-card {
-        background: #1D2633 !important;
-        color: #FFFFFF !important;
-        border-color: #4B5668 !important;
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.20) !important;
-    }
-
-    .review-card-title,
-    .review-card-content,
-    .review-text,
-    .review-item,
-    .score-title,
-    .score-label,
-    .score-category-label,
-    .phase3-score-number,
-    .review-output p {
-        color: #FFFFFF !important;
-    }
-
-    .score-number {
-        color: #D3B9F7 !important;
-    }
-
-    .score-number span {
-        color: #C5CBD5 !important;
-    }
-
-    .score-progress-bar {
-        background: #303A4A !important;
-    }
-
-    .score-progress-fill {
-        background: #817093 !important;
-    }
-
-    hr {
-        border-color: #303A4A !important;
-    }
-
-    /* Streamlit success/warning/error messages */
-    [data-testid="stAlert"] {
-        color: #FFFFFF !important;
-    }
-
-    [data-testid="stAlert"] * {
-        color: #FFFFFF !important;
-    }
-
-    /* Uploaded-code display */
-    .stCodeBlock {
-        border: 1px solid #4B5668 !important;
-        border-radius: 15px !important;
-    }
-
-    </style>
-    """, unsafe_allow_html=True)
+""",
+    unsafe_allow_html=True
+)
 
 
 # =========================================================
 # MAIN INTERFACE
 # =========================================================
 
-st.title("AI Code Review System")
+st.title(
+    "AI Code Review System"
+)
 
-st.write("Welcome to the AI-powered code review system!")
+st.write(
+    "Welcome to the AI-powered code review system!"
+)
 
-st.subheader("Enter your code")
+st.subheader(
+    "Enter your code"
+)
 
+
+# =========================================================
+# CODE INPUT
+# =========================================================
 
 code = st.text_area(
     "Paste your code below:",
     height=300
 )
 
+
+# =========================================================
+# FILE UPLOAD
+# =========================================================
 
 uploaded_file = st.file_uploader(
     "Or upload your code file:",
@@ -1363,23 +1638,30 @@ uploaded_file = st.file_uploader(
 # =========================================================
 
 source_code = code
+
 file_extension = "py"
+
 mime_type = "text/x-python"
 
 
 if uploaded_file is not None:
 
-    source_code = uploaded_file.read().decode("utf-8")
+    source_code = uploaded_file.read().decode(
+        "utf-8"
+    )
 
     if uploaded_file.name.lower().endswith(".java"):
 
         file_extension = "java"
+
         mime_type = "text/x-java-source"
 
     else:
 
         file_extension = "py"
+
         mime_type = "text/x-python"
+
 
     st.text_area(
         "Uploaded code:",
@@ -1395,6 +1677,7 @@ if uploaded_file is not None:
 def detect_language(source):
 
     java_indicators = [
+
         "public class ",
         "private class ",
         "protected class ",
@@ -1409,7 +1692,9 @@ def detect_language(source):
         "new Scanner("
     ]
 
+
     python_indicators = [
+
         "def ",
         "import ",
         "from ",
@@ -1422,42 +1707,66 @@ def detect_language(source):
         "False"
     ]
 
+
     java_score = sum(
-        1 for indicator in java_indicators
+
+        1
+
+        for indicator in java_indicators
+
         if indicator in source
     )
 
+
     python_score = sum(
-        1 for indicator in python_indicators
+
+        1
+
+        for indicator in python_indicators
+
         if indicator in source
     )
+
 
     if java_score > python_score:
 
-        return "java", "text/x-java-source"
+        return (
+            "java",
+            "text/x-java-source"
+        )
 
-    return "py", "text/x-python"
+
+    return (
+        "py",
+        "text/x-python"
+    )
 
 
 if uploaded_file is None and source_code.strip():
 
-    file_extension, mime_type = detect_language(source_code)
+    file_extension, mime_type = detect_language(
+        source_code
+    )
 
 
 # =========================================================
-# REVIEW CODE
+# REVIEW CODE BUTTON
 # =========================================================
 
-if st.button("Review Code"):
+if st.button(
+    "Review Code"
+):
 
     if source_code.strip():
 
-        with st.spinner("AI is reviewing your code..."):
+        with st.spinner(
+            "AI is reviewing your code..."
+        ):
 
             try:
 
                 # =================================================
-                # AI PROMPT
+                # AI REVIEW PROMPT
                 # =================================================
 
                 prompt = f"""
@@ -1530,38 +1839,64 @@ CODE TO REVIEW:
 {source_code}
 """
 
+
+                # =================================================
+                # GROQ REVIEW REQUEST
+                # =================================================
+
                 response = client.chat.completions.create(
-                model="openai/gpt-oss-120b",
-                messages=[
+
+                    model="openai/gpt-oss-120b",
+
+                    messages=[
                         {
                             "role": "user",
                             "content": prompt
                         }
                     ],
+
                     temperature=0.2
                 )
 
-                review = response.choices[0].message.content
 
+                review = (
+                    response
+                    .choices[0]
+                    .message
+                    .content
+                )
+
+
+                # =================================================
+                # CLEAN REVIEW
+                # =================================================
 
                 review = re.sub(
+
                     r"```(?:text|markdown)?",
+
                     "",
+
                     review,
+
                     flags=re.IGNORECASE
                 )
 
-                review = review.replace(
-                    "```",
-                    ""
-                ).strip()
+
+                review = (
+                    review
+                    .replace("```", "")
+                    .strip()
+                )
 
 
                 st.success(
                     "Code reviewed successfully!"
                 )
 
+
                 st.divider()
+
 
                 st.subheader(
                     "🔍 AI Code Review"
@@ -1572,7 +1907,9 @@ CODE TO REVIEW:
                 # PARSE REVIEW
                 # =================================================
 
-                sections = parse_review(review)
+                sections = parse_review(
+                    review
+                )
 
 
                 # =================================================
@@ -1580,8 +1917,11 @@ CODE TO REVIEW:
                 # =================================================
 
                 render_card(
+
                     "summary-card",
+
                     "📝 Summary",
+
                     format_content(
                         sections["SUMMARY"]
                     )
@@ -1594,21 +1934,29 @@ CODE TO REVIEW:
 
                 col1, col2 = st.columns(2)
 
+
                 with col1:
 
                     render_card(
+
                         "bug-card",
+
                         "🐞 Bugs & Errors",
+
                         format_content(
                             sections["BUGS"]
                         )
                     )
 
+
                 with col2:
 
                     render_card(
+
                         "warning-card",
+
                         "⚠️ Warnings",
+
                         format_content(
                             sections["WARNINGS"]
                         )
@@ -1621,21 +1969,29 @@ CODE TO REVIEW:
 
                 col1, col2 = st.columns(2)
 
+
                 with col1:
 
                     render_card(
+
                         "security-card",
+
                         "🔐 Security",
+
                         format_content(
                             sections["SECURITY"]
                         )
                     )
 
+
                 with col2:
 
                     render_card(
+
                         "performance-card",
+
                         "⚡ Performance",
+
                         format_content(
                             sections["PERFORMANCE"]
                         )
@@ -1647,8 +2003,11 @@ CODE TO REVIEW:
                 # =================================================
 
                 render_card(
+
                     "suggestion-card",
+
                     "💡 Suggestions for Improvement",
+
                     format_content(
                         sections["SUGGESTIONS"]
                     )
@@ -1660,8 +2019,11 @@ CODE TO REVIEW:
                 # =================================================
 
                 score_match = re.search(
+
                     r"Score\s*:\s*(\d+)\s*/\s*100",
+
                     sections["CODE QUALITY SCORE"],
+
                     re.IGNORECASE
                 )
 
@@ -1675,10 +2037,14 @@ CODE TO REVIEW:
                 else:
 
                     fallback_score = re.search(
+
                         r"Score\s*:\s*(\d+)\s*/\s*100",
+
                         review,
+
                         re.IGNORECASE
                     )
+
 
                     if fallback_score:
 
@@ -1702,9 +2068,13 @@ CODE TO REVIEW:
                 # =================================================
 
                 category_scores = {
+
                     "Correctness": 0,
+
                     "Security": 0,
+
                     "Performance": 0,
+
                     "Maintainability": 0
                 }
 
@@ -1712,10 +2082,14 @@ CODE TO REVIEW:
                 for category in category_scores:
 
                     category_match = re.search(
+
                         rf"{re.escape(category)}\s*:\s*(\d+)\s*/\s*100",
+
                         review,
+
                         re.IGNORECASE
                     )
+
 
                     if category_match:
 
@@ -1727,7 +2101,9 @@ CODE TO REVIEW:
                 for category in category_scores:
 
                     category_scores[category] = max(
+
                         0,
+
                         min(
                             category_scores[category],
                             100
@@ -1736,7 +2112,7 @@ CODE TO REVIEW:
 
 
                 # =================================================
-                # PHASE 3 — VISUAL CATEGORY SCORES
+                # DETAILED ANALYSIS
                 # =================================================
 
                 st.markdown(
@@ -1744,6 +2120,10 @@ CODE TO REVIEW:
                     unsafe_allow_html=True
                 )
 
+
+                # =================================================
+                # SCORE VISUAL
+                # =================================================
 
                 def render_score_visual(
                     title,
@@ -1759,53 +2139,57 @@ CODE TO REVIEW:
 
 
                     score_html = f"""
-<div class="phase3-score-card">
+                    <div class="phase3-score-card">
 
-    <div class="score-category-label">
+                        <div class="score-category-label">
 
-        <span>
-            {icon} {title}
-        </span>
+                            <span>
+                                {icon} {title}
+                            </span>
 
-        <span>
-            {score}/100
-        </span>
+                            <span>
+                                {score}/100
+                            </span>
 
-    </div>
-
-
-    <div class="score-progress-container">
-
-        <div class="score-progress-bar">
-
-            <div
-                class="score-progress-fill"
-                style="width: {score}%"
-            ></div>
-
-        </div>
-
-    </div>
+                        </div>
 
 
-    <div class="score-label">
+                        <div class="score-progress-container">
 
-        {description}
+                            <div class="score-progress-bar">
 
-    </div>
+                                <div
+                                    class="score-progress-fill"
+                                    style="width: {score}%"
+                                ></div>
 
-</div>
-"""
+                            </div>
+
+                        </div>
+
+
+                        <div class="score-label">
+
+                            {description}
+
+                        </div>
+
+                    </div>
+                    """
 
 
                     if hasattr(st, "html"):
 
-                        st.html(score_html)
+                        st.html(
+                            score_html
+                        )
 
                     else:
 
                         st.markdown(
+
                             score_html,
+
                             unsafe_allow_html=True
                         )
 
@@ -1816,21 +2200,35 @@ CODE TO REVIEW:
 
                 col1, col2 = st.columns(2)
 
+
                 with col1:
 
                     render_score_visual(
+
                         "Correctness",
+
                         "✓",
-                        category_scores["Correctness"],
+
+                        category_scores[
+                            "Correctness"
+                        ],
+
                         "Logic, bugs & functional accuracy"
                     )
+
 
                 with col2:
 
                     render_score_visual(
+
                         "Security",
+
                         "🔐",
-                        category_scores["Security"],
+
+                        category_scores[
+                            "Security"
+                        ],
+
                         "Security vulnerabilities & safe practices"
                     )
 
@@ -1841,21 +2239,35 @@ CODE TO REVIEW:
 
                 col1, col2 = st.columns(2)
 
+
                 with col1:
 
                     render_score_visual(
+
                         "Performance",
+
                         "⚡",
-                        category_scores["Performance"],
+
+                        category_scores[
+                            "Performance"
+                        ],
+
                         "Efficiency & optimization"
                     )
+
 
                 with col2:
 
                     render_score_visual(
+
                         "Maintainability",
+
                         "🛠",
-                        category_scores["Maintainability"],
+
+                        category_scores[
+                            "Maintainability"
+                        ],
+
                         "Readability, structure & code quality"
                     )
 
@@ -1865,61 +2277,75 @@ CODE TO REVIEW:
                 # =================================================
 
                 phase2_overall = round(
-                    sum(category_scores.values())
-                    / len(category_scores)
+
+                    sum(
+                        category_scores.values()
+                    )
+                    /
+                    len(category_scores)
                 )
 
 
                 score_html = f"""
-<div class="score-card">
+                <div class="score-card">
 
-    <div class="score-title">
-        📊 Overall Code Quality
-    </div>
+                    <div class="score-title">
+                        📊 Overall Code Quality
+                    </div>
 
-    <div class="score-number">
-        {phase2_overall}<span>/100</span>
-    </div>
+                    <div class="score-number">
+                        {phase2_overall}<span>/100</span>
+                    </div>
 
-    <div class="score-label">
-        Combined Correctness, Security, Performance & Maintainability
-    </div>
+                    <div class="score-label">
+                        Combined Correctness, Security,
+                        Performance & Maintainability
+                    </div>
 
-</div>
-"""
+                </div>
+                """
 
 
                 if hasattr(st, "html"):
 
-                    st.html(score_html)
+                    st.html(
+                        score_html
+                    )
 
                 else:
 
                     st.markdown(
+
                         score_html,
+
                         unsafe_allow_html=True
                     )
 
 
                 # =================================================
-                # PHASE 5 — AI SUGGESTED IMPROVED CODE
+                # AI IMPROVED CODE
                 # =================================================
 
                 st.divider()
+
 
                 st.subheader(
                     "✨ AI Suggested Improved Code"
                 )
 
+
                 st.write(
+
                     "AI-generated version of your code with the identified "
                     "issues and improvement suggestions applied."
                 )
 
 
                 with st.spinner(
+
                     "AI is preparing an improved version of your code..."
                 ):
+
 
                     improvement_prompt = f"""
 You are an expert software engineer.
@@ -1967,72 +2393,104 @@ ORIGINAL SOURCE CODE:
 
 
                     improvement_response = client.chat.completions.create(
-                    model="openai/gpt-oss-120b",
-                    messages=[
-                        {
-                            "role": "user",
-                            "content": improvement_prompt
-                        }
-                    ],
-                    temperature=0.1
-                )
 
-                    improved_code = improvement_response.choices[0].message.content
+                        model="openai/gpt-oss-120b",
+
+                        messages=[
+                            {
+                                "role": "user",
+                                "content": improvement_prompt
+                            }
+                        ],
+
+                        temperature=0.1
+                    )
+
+
+                    improved_code = (
+
+                        improvement_response
+                        .choices[0]
+                        .message
+                        .content
+                    )
 
 
                     improved_code = re.sub(
+
                         r"```(?:python|java|javascript|typescript|text)?",
+
                         "",
+
                         improved_code,
+
                         flags=re.IGNORECASE
                     )
 
-                    improved_code = improved_code.replace(
-                        "```",
-                        ""
-                    ).strip()
+
+                    improved_code = (
+
+                        improved_code
+                        .replace("```", "")
+                        .strip()
+                    )
 
 
                 # =================================================
-                # PHASE 6 — DISPLAY IMPROVED CODE
+                # DISPLAY IMPROVED CODE
                 # =================================================
 
                 if improved_code:
 
                     st.code(
+
                         improved_code,
+
                         language=(
+
                             "java"
+
                             if file_extension == "java"
+
                             else "python"
                         )
                     )
 
 
                     # =================================================
-                    # PHASE 6.1 — DOWNLOAD IMPROVED CODE
+                    # DOWNLOAD IMPROVED CODE
                     # =================================================
 
                     st.download_button(
+
                         label="⬇️ Download Improved Code",
+
                         data=improved_code,
-                        file_name=f"improved_code.{file_extension}",
+
+                        file_name=(
+                            f"improved_code.{file_extension}"
+                        ),
+
                         mime=mime_type
                     )
 
 
                     st.success(
-                        f"Improved {file_extension.upper()} code generated successfully!"
+
+                        f"Improved {file_extension.upper()} "
+                        "code generated successfully!"
                     )
 
 
                     # =================================================
-                    # PHASE 6.2 — COPY IMPROVED CODE
+                    # COPY BUTTON
                     # =================================================
 
                     st.markdown(
+
                         """
                         <script>
+
                         function copyImprovedCode() {
 
                             const codeBlocks =
@@ -2052,17 +2510,16 @@ ORIGINAL SOURCE CODE:
                                 );
                             }
                         }
+
                         </script>
                         """,
+
                         unsafe_allow_html=True
                     )
 
 
-                    # =================================================
-                    # PHASE 6.3 — COPY IMPROVED CODE
-                    # =================================================
-
                     st.markdown(
+
                         """
                         <div style="
                             margin-top: 15px;
@@ -2070,12 +2527,15 @@ ORIGINAL SOURCE CODE:
                         ">
                         </div>
                         """,
+
                         unsafe_allow_html=True
                     )
 
 
                     if st.button(
+
                         "📋 Copy Improved Code",
+
                         key="copy_improved_code"
                     ):
 
@@ -2085,15 +2545,19 @@ ORIGINAL SOURCE CODE:
 
 
                     if st.session_state.get(
+
                         "copy_code_triggered",
+
                         False
                     ):
 
                         st.markdown(
+
                             f"""
                             <script>
 
-                            const improvedCode = {repr(improved_code)};
+                            const improvedCode =
+                                {repr(improved_code)};
 
                             navigator.clipboard.writeText(
                                 improvedCode
@@ -2110,12 +2574,16 @@ ORIGINAL SOURCE CODE:
 
                             </script>
                             """,
+
                             unsafe_allow_html=True
                         )
 
+
                         st.success(
+
                             "📋 Improved code copied to clipboard!"
                         )
+
 
                         st.session_state[
                             "copy_code_triggered"
@@ -2125,7 +2593,9 @@ ORIGINAL SOURCE CODE:
                 else:
 
                     st.warning(
-                        "The AI could not generate an improved version."
+
+                        "The AI could not generate "
+                        "an improved version."
                     )
 
 
@@ -2136,6 +2606,7 @@ ORIGINAL SOURCE CODE:
             except Exception as e:
 
                 st.error(
+
                     f"Something went wrong: {e}"
                 )
 
@@ -2143,5 +2614,6 @@ ORIGINAL SOURCE CODE:
     else:
 
         st.warning(
+
             "Please enter or upload some code first."
         )
