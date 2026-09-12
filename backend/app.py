@@ -147,6 +147,7 @@ st.markdown("""
 
 
 /* Keep content above decorative background */
+
 .main {
     position: relative;
     z-index: 10;
@@ -592,137 +593,575 @@ label {
 
 .stButton > button,
 .stDownloadButton > button {
+
     background-color: #817093 !important;
+
     color: #FFFFFF !important;
+
     border: none !important;
+
     border-radius: 13px !important;
+
     padding: 0.75rem 1.9rem !important;
+
     font-family: "Times New Roman", Times, serif !important;
+
     font-size: 17px !important;
+
     font-weight: bold !important;
+
     font-style: italic !important;
+
     box-shadow: none !important;
-    transition: transform 0.3s ease, background-color 0.3s ease;
+
+    transition:
+        transform 0.3s ease,
+        background-color 0.3s ease;
 }
+
 
 .stButton > button *,
 .stDownloadButton > button * {
+
     color: #FFFFFF !important;
+
     fill: #FFFFFF !important;
+
     font-family: "Times New Roman", Times, serif !important;
+
     font-weight: bold !important;
 }
 
+
 .stButton > button:hover,
 .stDownloadButton > button:hover {
+
     background-color: #705F80 !important;
+
     color: #FFFFFF !important;
+
     transform: translateY(-3px);
 }
 
+
 .stButton > button:hover *,
 .stDownloadButton > button:hover * {
+
     color: #FFFFFF !important;
+
     fill: #FFFFFF !important;
 }
 
+
 /* =========================================================
-   DARK MODE — REQUESTED UI
+   DARK MODE — REFERENCE IMAGE UI
    ========================================================= */
 
+/* ---------- MAIN BACKGROUND ---------- */
+
 [data-theme="dark"] .stApp,
-[data-theme="dark"] [data-testid="stAppViewContainer"] {
-    background-color: #0F131D !important;
-    color: #FFFFFF !important;
+[data-theme="dark"] [data-testid="stAppViewContainer"],
+[data-theme="dark"] [data-testid="stAppViewContainer"] > section {
+
+    background: #0D121B !important;
+
+    color: #F7F3FF !important;
 }
+
+
+/* ---------- MAIN CONTENT ---------- */
+
+[data-theme="dark"] .main {
+
+    background: transparent !important;
+}
+
 
 [data-theme="dark"] .main .block-container {
-    background-color: transparent !important;
+
+    background: transparent !important;
+
+    color: #F7F3FF !important;
+
+    position: relative !important;
+
+    isolation: isolate !important;
+
+    z-index: 10 !important;
 }
 
-[data-theme="dark"] h1 {
-    color: #CBB5F5 !important;
+
+/* =========================================================
+   PURPLE BACKGROUND BUBBLES
+   ========================================================= */
+
+[data-theme="dark"] .stApp > div:first-child::before {
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(91, 57, 135, 0.45),
+            rgba(45, 29, 72, 0.28)
+        ) !important;
+
+    opacity: 0.78 !important;
+
+    z-index: 0 !important;
+
+    pointer-events: none !important;
 }
+
+
+[data-theme="dark"] .stApp > div:first-child::after {
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(91, 57, 135, 0.40),
+            rgba(45, 29, 72, 0.25)
+        ) !important;
+
+    opacity: 0.78 !important;
+
+    z-index: 0 !important;
+
+    pointer-events: none !important;
+}
+
+
+/* =========================================================
+   BACKGROUND DECORATIONS BEHIND CONTENT
+   ========================================================= */
+
+[data-theme="dark"] .main .block-container::before,
+[data-theme="dark"] .main .block-container::after {
+
+    z-index: -1 !important;
+
+    pointer-events: none !important;
+}
+
+
+[data-theme="dark"] .main .block-container > div {
+
+    position: relative !important;
+
+    z-index: 5 !important;
+}
+
+
+/* =========================================================
+   TITLE
+   ========================================================= */
+
+[data-theme="dark"] h1 {
+
+    color: #D4B8F5 !important;
+
+    text-shadow:
+        0 0 8px rgba(185, 142, 235, 0.28),
+        0 0 20px rgba(145, 92, 205, 0.12) !important;
+}
+
+
+/* =========================================================
+   HEADINGS
+   ========================================================= */
 
 [data-theme="dark"] h2,
 [data-theme="dark"] h3,
+[data-theme="dark"] h4 {
+
+    color: #F5F0FC !important;
+}
+
+
+/* =========================================================
+   ALL NORMAL TEXT
+   ========================================================= */
+
 [data-theme="dark"] p,
 [data-theme="dark"] label,
 [data-theme="dark"] [data-testid="stMarkdownContainer"] {
-    color: #FFFFFF !important;
+
+    color: #F2EDF8 !important;
 }
 
-[data-theme="dark"] .stTextArea,
-[data-theme="dark"] [data-testid="stFileUploader"],
-[data-theme="dark"] .review-output,
-[data-theme="dark"] .review-card,
-[data-theme="dark"] .score-card,
-[data-theme="dark"] .phase3-score-card {
-    background-color: #1B2230 !important;
-    border-color: #4B5363 !important;
+
+/* =========================================================
+   CODE INPUT CARD
+   ========================================================= */
+
+[data-theme="dark"] .stTextArea {
+
+    background:
+        rgba(27, 34, 46, 0.90) !important;
+
+    border:
+        1px solid #4C5668 !important;
+
+    border-radius:
+        18px !important;
+
+    box-shadow:
+        0 0 0 1px rgba(120, 130, 150, 0.04),
+        0 10px 30px rgba(0, 0, 0, 0.20) !important;
 }
 
-[data-theme="dark"] .stTextArea textarea,
+
+[data-theme="dark"] .stTextArea textarea {
+
+    background:
+        #1A212C !important;
+
+    color:
+        #F8F4FF !important;
+
+    border:
+        1px solid #566174 !important;
+
+    border-radius:
+        15px !important;
+
+    caret-color:
+        #D7BBF7 !important;
+}
+
+
+[data-theme="dark"] .stTextArea textarea::placeholder {
+
+    color:
+        #A9A3B3 !important;
+}
+
+
+[data-theme="dark"] .stTextArea textarea:focus {
+
+    border-color:
+        #707B91 !important;
+
+    box-shadow:
+        0 0 0 1px rgba(154, 121, 190, 0.18) !important;
+}
+
+
+/* =========================================================
+   FILE UPLOADER
+   ========================================================= */
+
+[data-theme="dark"] [data-testid="stFileUploader"] {
+
+    background:
+        rgba(27, 34, 46, 0.90) !important;
+
+    border:
+        1px solid #4C5668 !important;
+
+    border-radius:
+        18px !important;
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.20) !important;
+}
+
+
 [data-theme="dark"] [data-testid="stFileUploaderDropzone"] {
-    background-color: #171D28 !important;
-    color: #FFFFFF !important;
-    border-color: #596171 !important;
+
+    background:
+        #1A212C !important;
+
+    border:
+        1px dashed #536075 !important;
+
+    border-radius:
+        15px !important;
 }
 
-/* EVERY BUTTON IN DARK MODE: same Upload colour + white text */
+
+/* =========================================================
+   ALL BUTTONS
+   SAME DARK COLOUR AS REFERENCE UPLOAD BUTTON
+   ========================================================= */
+
 [data-theme="dark"] .stButton > button,
 [data-theme="dark"] .stDownloadButton > button,
 [data-theme="dark"] [data-testid="stFileUploader"] button,
-[data-theme="dark"] button[kind="secondary"],
-[data-theme="dark"] button[kind="primary"] {
-    background-color: #131720 !important;
-    color: #FFFFFF !important;
-    border-color: #2B3342 !important;
+[data-theme="dark"] button[kind="primary"],
+[data-theme="dark"] button[kind="secondary"] {
+
+    background:
+        #101722 !important;
+
+    color:
+        #FFFFFF !important;
+
+    border:
+        1px solid #303A4C !important;
+
+    border-radius:
+        12px !important;
+
+    font-family:
+        "Times New Roman", Times, serif !important;
+
+    font-size:
+        17px !important;
+
+    font-weight:
+        bold !important;
+
+    font-style:
+        italic !important;
+
+    box-shadow:
+        none !important;
+
+    text-shadow:
+        none !important;
 }
+
+
+/* =========================================================
+   ALL BUTTON TEXT — PURE WHITE
+   ========================================================= */
 
 [data-theme="dark"] .stButton > button *,
 [data-theme="dark"] .stDownloadButton > button *,
 [data-theme="dark"] [data-testid="stFileUploader"] button *,
-[data-theme="dark"] button[kind="secondary"] *,
-[data-theme="dark"] button[kind="primary"] * {
-    color: #FFFFFF !important;
-    fill: #FFFFFF !important;
-    stroke: #FFFFFF !important;
+[data-theme="dark"] button[kind="primary"] *,
+[data-theme="dark"] button[kind="secondary"] * {
+
+    color:
+        #FFFFFF !important;
+
+    fill:
+        #FFFFFF !important;
+
+    stroke:
+        #FFFFFF !important;
+
+    font-family:
+        "Times New Roman", Times, serif !important;
+
+    font-weight:
+        bold !important;
+
+    text-shadow:
+        none !important;
 }
+
+
+/* Actual button labels */
+
+[data-theme="dark"] .stButton > button p,
+[data-theme="dark"] .stButton > button span,
+[data-theme="dark"] .stDownloadButton > button p,
+[data-theme="dark"] .stDownloadButton > button span,
+[data-theme="dark"] [data-testid="stFileUploader"] button p,
+[data-theme="dark"] [data-testid="stFileUploader"] button span {
+
+    color:
+        #FFFFFF !important;
+}
+
+
+/* =========================================================
+   BUTTON HOVER
+   ========================================================= */
 
 [data-theme="dark"] .stButton > button:hover,
 [data-theme="dark"] .stDownloadButton > button:hover,
 [data-theme="dark"] [data-testid="stFileUploader"] button:hover,
-[data-theme="dark"] button[kind="secondary"]:hover,
-[data-theme="dark"] button[kind="primary"]:hover {
-    background-color: #131720 !important;
-    color: #FFFFFF !important;
+[data-theme="dark"] button[kind="primary"]:hover,
+[data-theme="dark"] button[kind="secondary"]:hover {
+
+    background:
+        #141C28 !important;
+
+    color:
+        #FFFFFF !important;
+
+    border-color:
+        #59657A !important;
+
+    transform:
+        translateY(-2px) !important;
+
+    box-shadow:
+        0 5px 18px rgba(0, 0, 0, 0.25) !important;
 }
+
 
 [data-theme="dark"] .stButton > button:hover *,
 [data-theme="dark"] .stDownloadButton > button:hover *,
-[data-theme="dark"] [data-testid="stFileUploader"] button:hover *,
-[data-theme="dark"] button[kind="secondary"]:hover *,
-[data-theme="dark"] button[kind="primary"]:hover * {
-    color: #FFFFFF !important;
-    fill: #FFFFFF !important;
-    stroke: #FFFFFF !important;
+[data-theme="dark"] [data-testid="stFileUploader"] button:hover * {
+
+    color:
+        #FFFFFF !important;
+
+    fill:
+        #FFFFFF !important;
+
+    stroke:
+        #FFFFFF !important;
 }
 
-/* Decorative background stays behind the content */
-.main .block-container {
-    isolation: isolate;
+
+/* =========================================================
+   REVIEW / RESULT CARDS
+   ========================================================= */
+
+[data-theme="dark"] .review-card,
+[data-theme="dark"] .review-output,
+[data-theme="dark"] .score-card,
+[data-theme="dark"] .phase3-score-card {
+
+    background:
+        #1A212C !important;
+
+    border:
+        1px solid #4B5668 !important;
+
+    color:
+        #F5F0FA !important;
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.20) !important;
 }
 
-.main .block-container::before,
-.main .block-container::after {
-    z-index: 0 !important;
+
+[data-theme="dark"] .review-card-title,
+[data-theme="dark"] .score-title {
+
+    color:
+        #F5F0FA !important;
 }
 
-.main .block-container > div {
-    position: relative;
-    z-index: 2;
+
+[data-theme="dark"] .review-card-content,
+[data-theme="dark"] .review-text,
+[data-theme="dark"] .review-item,
+[data-theme="dark"] .score-label {
+
+    color:
+        #DDD7E6 !important;
 }
+
+
+/* =========================================================
+   SCORE
+   ========================================================= */
+
+[data-theme="dark"] .score-number,
+[data-theme="dark"] .phase3-score-number {
+
+    color:
+        #CDB3ED !important;
+}
+
+
+[data-theme="dark"] .score-number span {
+
+    color:
+        #AAA4B5 !important;
+}
+
+
+[data-theme="dark"] .score-progress-bar {
+
+    background:
+        #303746 !important;
+}
+
+
+[data-theme="dark"] .score-progress-fill {
+
+    background:
+        linear-gradient(
+            90deg,
+            #75608E,
+            #A98AC7
+        ) !important;
+}
+
+
+/* =========================================================
+   ALERTS
+   ========================================================= */
+
+[data-theme="dark"] .stAlert {
+
+    background:
+        #1A212C !important;
+
+    border:
+        1px solid #4B5668 !important;
+
+    color:
+        #FFFFFF !important;
+}
+
+
+[data-theme="dark"] .stAlert * {
+
+    color:
+        #FFFFFF !important;
+}
+
+
+/* =========================================================
+   CODE OUTPUT
+   ========================================================= */
+
+[data-theme="dark"] .stCodeBlock,
+[data-theme="dark"] pre {
+
+    background:
+        #111720 !important;
+
+    border:
+        1px solid #343D4D !important;
+
+    color:
+        #F4EFFA !important;
+}
+
+
+/* =========================================================
+   DIVIDER
+   ========================================================= */
+
+[data-theme="dark"] hr {
+
+    border-color:
+        #303847 !important;
+}
+
+
+/* =========================================================
+   SPINNER
+   ========================================================= */
+
+[data-theme="dark"] [data-testid="stSpinner"] {
+
+    color:
+        #D3B7F2 !important;
+}
+
+
+/* =========================================================
+   FINAL CONTENT LAYER
+   ========================================================= */
+
+[data-theme="dark"] .main .block-container > * {
+
+    position:
+        relative !important;
+
+    z-index:
+        5 !important;
+}
+
 
 /* =========================================================
    AI REVIEW OUTPUT
@@ -746,7 +1185,6 @@ label {
         0 6px 20px rgba(75, 55, 90, 0.06);
 
     animation: outputReveal 1.6s ease-out both;
-
 }
 
 
@@ -777,7 +1215,6 @@ label {
     font-family: "Times New Roman", Times, serif !important;
 
     line-height: 1.75;
-
 }
 
 
@@ -792,7 +1229,6 @@ label {
     box-shadow: none !important;
 
     animation: alertReveal 1s ease-out both;
-
 }
 
 
@@ -822,7 +1258,6 @@ hr {
     margin-top: 2rem;
 
     margin-bottom: 2rem;
-
 }
 
 
@@ -833,7 +1268,6 @@ hr {
 .stCodeBlock {
 
     border-radius: 15px !important;
-
 }
 
 
@@ -896,7 +1330,6 @@ header {
     transition:
         transform 0.3s ease,
         border-color 0.3s ease;
-
 }
 
 
@@ -905,7 +1338,6 @@ header {
     transform: translateY(-3px);
 
     border-color: #C7B7D3;
-
 }
 
 
@@ -920,7 +1352,6 @@ header {
     color: #352D3B;
 
     margin-bottom: 14px;
-
 }
 
 
@@ -933,14 +1364,12 @@ header {
     line-height: 1.7;
 
     color: #403646;
-
 }
 
 
 .review-text {
 
     margin-bottom: 6px;
-
 }
 
 
@@ -949,7 +1378,6 @@ header {
     margin-bottom: 8px;
 
     padding-left: 4px;
-
 }
 
 
@@ -1004,7 +1432,6 @@ header {
         0 6px 20px rgba(70, 50, 85, 0.06);
 
     animation: scoreAppear 1.2s ease-out both;
-
 }
 
 
@@ -1017,7 +1444,6 @@ header {
     font-weight: bold;
 
     color: #352D3B;
-
 }
 
 
@@ -1034,7 +1460,6 @@ header {
     color: #756481;
 
     margin-top: 10px;
-
 }
 
 
@@ -1045,7 +1470,6 @@ header {
     color: #766B7D;
 
     font-style: normal;
-
 }
 
 
@@ -1058,7 +1482,6 @@ header {
     color: #766B7D;
 
     margin-top: 4px;
-
 }
 
 
@@ -1113,55 +1536,93 @@ header {
    ========================================================= */
 
 .score-progress-container {
+
     margin-top: 18px;
 }
 
+
 .score-progress-bar {
+
     width: 100%;
+
     height: 10px;
+
     background-color: #EEE7F2;
+
     border-radius: 20px;
+
     overflow: hidden;
 }
 
+
 .score-progress-fill {
+
     height: 100%;
+
     border-radius: 20px;
+
     background-color: #817093;
+
     animation: progressFill 1.5s ease-out both;
 }
 
+
 @keyframes progressFill {
+
     from {
         width: 0%;
     }
+
 }
 
+
 .score-category-label {
+
     display: flex;
+
     justify-content: space-between;
+
     align-items: center;
+
     margin-bottom: 7px;
+
     font-family: "Times New Roman", Times, serif;
+
     font-size: 16px;
+
     color: #403646;
+
     font-weight: bold;
 }
 
+
 .phase3-score-card {
+
     background-color: #FFFFFF;
+
     border: 1px solid #DED3E7;
+
     border-radius: 20px;
+
     padding: 24px;
+
     margin-top: 16px;
-    box-shadow: 0 6px 20px rgba(70, 50, 85, 0.06);
+
+    box-shadow:
+        0 6px 20px rgba(70, 50, 85, 0.06);
+
     animation: reviewCardAppear 0.8s ease-out both;
 }
 
+
 .phase3-score-number {
+
     font-family: "Times New Roman", Times, serif;
+
     font-size: 32px;
+
     font-weight: bold;
+
     color: #756481;
 }
 
@@ -1365,8 +1826,8 @@ CODE TO REVIEW:
 """
 
                 response = client.chat.completions.create(
-                model="openai/gpt-oss-120b",
-                messages=[
+                    model="openai/gpt-oss-120b",
+                    messages=[
                         {
                             "role": "user",
                             "content": prompt
@@ -1801,15 +2262,15 @@ ORIGINAL SOURCE CODE:
 
 
                     improvement_response = client.chat.completions.create(
-                    model="openai/gpt-oss-120b",
-                    messages=[
-                        {
-                            "role": "user",
-                            "content": improvement_prompt
-                        }
-                    ],
-                    temperature=0.1
-                )
+                        model="openai/gpt-oss-120b",
+                        messages=[
+                            {
+                                "role": "user",
+                                "content": improvement_prompt
+                            }
+                        ],
+                        temperature=0.1
+                    )
 
                     improved_code = improvement_response.choices[0].message.content
 
